@@ -29,6 +29,105 @@ class Cost(object):
 	def costo(self,op):
 		return self.dict[op]
 
+class Copiar():
+	def __init__(self,char):
+		self.char = char
+
+	def __str__(self):
+		s = "copiar %s" % self.char
+		return s
+
+class Reemplazar():
+	def __init__(self,char1,char2):
+		self.char1=char1
+		self.char2=char2
+
+	def __str__(self):
+		s = "reemplazar %s %s" %(self.char1,self.char2)
+		return s
+
+class Borrar():
+	def __init__(self,char):
+		self.char=char
+
+	def __str__(self):
+		s = "borrar %s" % self.char
+		return s
+
+class Insertar():
+	def __init__(self,char):
+		self.char=char
+
+	def __str__(self):
+		s = "insertar %s" % self.char
+		return s
+
+class Intercambiar():
+	def __init__(self,char1,char2):
+		self.char1=char1
+		self.char2=char2
+
+	def __str__(self):
+		s = "intercambiar %s %s" % (self.char1 , self.char2)
+		
+		return s
+
+class Terminar():
+	def __str__(self):
+		return "terminar"
+
+class Problem():
+
+	def __init__(self,pal1,pal2):
+		self.base = pal1
+		self.posbase = 0
+		self.objective = pal2
+		self.res=[]
+		self.mem={}
+		self.cost=0
+
+	def eob(self):
+		return self.posbase == len(self.base)
+
+	def verBase(self):
+		return self.base[self.posbase]
+
+	def verSigBase(self):
+		try:
+			return self.base[self.posbase+1]
+		except IndexError:
+			return None
+
+	def copiar(self):
+		c = Copiar(self.verBase)
+		self.res.append(c)
+		self.posBase += 1
+
+	def solve(self,pos):
+		"""Determina cual es la mejor manera de obtener el caracter actual
+		con la palabra base
+		"""
+		r = []
+		if self.eob():
+			"""Se debe insertar el caracter"""
+			char = self.objective[pos]
+			print char
+			i = Insertar(char)
+			r.append(i)
+			return r
+
+
+	def solution(self,pos):
+		"""Como premisa supongo que ya poseo como conseguir una solucion anterior
+		"""
+		if pos == 0:
+			return self.solve(pos)
+
+		if not self.mem.has_key(pos-1):
+			self.mem[pos-1] = self.solution(pos-1)
+		self.mem[pos] = self.mem[pos-1] + self.solve(pos)
+		return self.mem[pos]
+		
 def checkArguments():
 	return True
 
@@ -40,10 +139,14 @@ def main():
 	print "Teoria y Algoritmos 1 - [75.29]"
 	print "TP2 - Distancia de Edicion"
 	print "Autores: Alejandro Pernin (92216) y Lautaro Medrano (90009)\n"
-	s1 = Cost(file_source=sys.argv[1])
-	print s1.dict
-	print "El costo de intercambiar es %s " % s1.costo('intercambiar')
-
-
+	s1 = Cost(file_source=sys.argv[3])
+	pal = sys.argv[1]
+	pal2 = sys.argv[2]
+	copy = Terminar()
+	print copy
+	p = Problem(pal,pal2)
+	s = p.solution(3)
+	for i in s:
+		print i
 if __name__ == '__main__':
 	main()
