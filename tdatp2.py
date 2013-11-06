@@ -110,7 +110,13 @@ class Problem():
 		self.cost += Cost().costo('insertar')
 		return [i]
 
-	def intercambiar(self,pos):
+	def intercambiar(self):
+		x = self.verBase()
+		y = self.verSigBase()
+		i = Intercambiar(x,y)
+		self.cost += Cost().costo('intercambiar')
+		self.posbase += 2
+		return [i]
 
 	def solve(self,pos):
 		"""Determina cual es la mejor manera de obtener el caracter actual
@@ -133,7 +139,10 @@ class Problem():
 			y = self.verSigBase()
 			if (not y is None) and (x == self.objective[pos+1]) and (y == self.objective[pos]):
 				print "Hay que intercambiar" 
-
+				print "la posicion es %s" % pos
+				r = self.intercambiar()
+				self.mem[pos+1]=self.mem[pos-1]+r
+				return r
 
 	def solution(self,pos):
 		"""Como premisa supongo que ya poseo como conseguir una solucion anterior
@@ -144,6 +153,7 @@ class Problem():
 		if not self.mem.has_key(pos-1):
 			self.mem[pos-1] = self.solution(pos-1)
 		if not self.mem.has_key(pos):
+			print "Veo si hay solucion para %s con pos %s" % (self.objective[pos],pos)
 			self.mem[pos] = self.mem[pos-1] + self.solve(pos)
 		return self.mem[pos]
 
