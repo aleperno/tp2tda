@@ -99,22 +99,40 @@ class Problem():
 			return None
 
 	def copiar(self):
-		c = Copiar(self.verBase)
-		self.res.append(c)
-		self.posBase += 1
+		c = Copiar(self.verBase())
+		self.posbase += 1
+		self.cost += Cost().costo('copiar')
+		return [c]
+
+	def insertar(self,pos):
+		char = self.objective[pos]
+		i = Insertar(char)
+		self.cost += Cost().costo('insertar')
+		return [i]
+
+	def intercambiar(self,pos):
 
 	def solve(self,pos):
 		"""Determina cual es la mejor manera de obtener el caracter actual
 		con la palabra base
 		"""
+		print "Se intenta solucionar para %s" % self.objective[pos]
 		r = []
 		if self.eob():
-			"""Se debe insertar el caracter"""
-			char = self.objective[pos]
-			print char
-			i = Insertar(char)
-			r.append(i)
-			return r
+			"""No hay otra opcion más que insertar, ya que se agotaron
+			los caracteres disponibles en la base"""
+			return self.insertar(pos)
+
+		if self.verBase() == self.objective[pos]:
+			"""Es el caso de copiar"""
+			print "es el caso de copiar"
+			return self.copiar()
+
+		if pos < len(self.objective):
+			x = self.verBase()
+			y = self.verSigBase()
+			if (not y is None) and (x == self.objective[pos+1]) and (y == self.objective[pos]):
+				print "Hay que intercambiar" 
 
 
 	def solution(self,pos):
@@ -125,9 +143,10 @@ class Problem():
 
 		if not self.mem.has_key(pos-1):
 			self.mem[pos-1] = self.solution(pos-1)
-		self.mem[pos] = self.mem[pos-1] + self.solve(pos)
+		if not self.mem.has_key(pos):
+			self.mem[pos] = self.mem[pos-1] + self.solve(pos)
 		return self.mem[pos]
-		
+
 def checkArguments():
 	return True
 
@@ -142,11 +161,12 @@ def main():
 	s1 = Cost(file_source=sys.argv[3])
 	pal = sys.argv[1]
 	pal2 = sys.argv[2]
-	copy = Terminar()
+	copy = Copiar('h')
 	print copy
 	p = Problem(pal,pal2)
 	s = p.solution(3)
 	for i in s:
 		print i
+	print "El costo es: %s" % str(p.cost)
 if __name__ == '__main__':
 	main()
