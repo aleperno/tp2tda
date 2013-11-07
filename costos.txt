@@ -1,6 +1,6 @@
-copiar:2
-reemplazar:1
+copiar:1
+reemplazar:20
 borrar:3
-insertar:4
-intercambiar:5
+insertar:40
+intercambiar:1
 terminar:6

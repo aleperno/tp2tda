@@ -125,6 +125,7 @@ class Problem():
 		return [t]
 
 	def intercambiar(self):
+		print "SE HAEC UN INTERCAMBIO"
 		x = self.verBase()
 		y = self.verSigBase()
 		i = Intercambiar(x,y)
@@ -138,6 +139,12 @@ class Problem():
 		self.posbase += 1
 		return [r]
 
+	def borrar(self):
+		b = Borrar(self.verBase())
+		self.posbase += 1
+		self.cost += Cost().costo('borrar')
+		return [b]
+
 	def checkintercambio(self,pos):
 		"""Evalua si es viable un intercambio"""
 		if pos < len(self.objective):
@@ -147,7 +154,7 @@ class Problem():
 			o1 = self.objective[pos]
 			o2 = self.verSigObj(pos)
 			if (not b2 is None and not o2 is None) and (b1 == o2) and (b2 == o1):
-				print "Hay que intercambiar" 
+				#print "Hay que intercambiar" 
 				return True
 		return False
 
@@ -156,7 +163,7 @@ class Problem():
 		dist = 0
 		aux = self.posbase #Guardo la posicion original
 		while not self.eob():
-			print "analizando"
+			#print "analizando"
 			if self.verBase()==self.verObj(pos):
 				dist = self.posbase - aux
 			self.posbase += 1
@@ -177,12 +184,33 @@ class Problem():
 	def min(self,l):
 		minimo = None
 		for i in l:
+			if (i[0]==0):
+				continue
 			if (minimo is None) or (i[0]*Cost().costo(i[1]) < Cost().costo(minimo)):
 				minimo = i[1]
 		print "El minimo es %s" % minimo 
 		return minimo
 
-	def solve(self,pos):
+	def min2(self,l):
+		minimo = None
+		costo = None
+		for i in l:
+			if i[0] is None:
+				continue
+			if (minimo is None) or (i[0] < costo):
+				minimo = i[1]
+				costo = i[0] 
+		return minimo
+
+	def opcost(self,l):
+		"""Devuelve el costo total de una lista de operaciones"""
+		aux = 0
+		for i in l:
+			cost = (i[0]*Cost().costo(i[1]))
+			aux += cost	
+		return aux
+
+	def solve(self,pos,aux=None):
 		"""Determina cual es la mejor manera de obtener el caracter actual
 		con la palabra base
 		"""
@@ -210,11 +238,72 @@ class Problem():
 			"""Evaluo caso de intercambio"""
 			if self.checkintercambio(pos):
 				r = self.intercambiar()
-				self.mem[pos+1]=self.mem[pos-1]+r
+				try: 
+					self.mem[pos+1]=self.mem[pos-1]+r
+				except KeyError:
+					if (aux is not None):
+						self.mem[pos+1]=aux+r
+					else:
+						pass
 				return r
 
 		"""En este punto tengo que evaluar borrar, insertar o reemplazar"""
-		print "LA DISTANCIA AL PROXIMO INTERCAMBIO ES %s" % self.distinter(pos)
+
+		d = None
+		c = None
+		d1 = self.distinter(pos)
+		if d1>0:
+			"""Distancia cero implica que no es posible la operacion"""
+			c1 = self.opcost([(d1,'borrar'),(1,'intercambiar')])
+			d = d1
+			c = c1
+
+		d2 = self.distcopy(pos)
+		print "LA DISTANCIA DE COPIADO ES %s" % d2
+		if d2>0:
+			c2 = self.opcost([(d2,'borrar'),(1,'copiar')])
+			print "EL COSTO DE BORRAR Y COPIAR ES %s" % c2
+			if (c2 < c) or (c is None):
+				c = c2
+				d = d2
+
+		c3 = self.opcost([(1,'insertar')])
+		c4 = self.opcost([(1,'reemplazar')])
+
+		op = self.min2([(c,'borrar'),(c3,'insertar'),(c4,'reemplazar')])
+
+		print "**** LA OPERACION MAS PERFORMANTE ES **** %s" % op
+		if op == 'borrar':
+			if d is None:
+				print "ACA ESTA EL ERROR *!QWE$$··$$"
+			for i in range(0,d):
+				r += self.borrar()
+			r += self.solve(pos,r)
+			return r
+		elif op == 'insertar':
+			return self.insertar(pos)
+		else:
+			print "SE VA A REMPLAZAR WUOOO"
+			return self.reemplazar(pos)
+		"""
+		if d>0 :
+			print "SE VA A BORRAR"
+			for i in range(0,d):
+				r += self.borrar()
+			r+=self.solve(pos)
+			return r
+
+		"""
+		"""
+		d = self.distcopy(pos)
+		print "LA DISTANCIA AL PROXIMO COPIA ES %s" % d
+		if d>0 :
+			print "SE VA A BORRAR"
+			for i in range(0,d):
+				r += self.borrar()
+			r+=self.solve(pos)
+			return r
+		"""
 		return ['false']
 
 	def solution(self,pos):
@@ -244,12 +333,10 @@ def checkArguments():
 def main():
 	print "Teoria y Algoritmos 1 - [75.29]"
 	print "TP2 - Distancia de Edicion"
-	print "Autores: Alejandro Pernin (92216) y Lautaro Medrano (90009)\n"
+	print "Autores: Alejandro Pernin (92216)\n"
 	s1 = Cost(file_source=sys.argv[3])
 	pal = sys.argv[1]
 	pal2 = sys.argv[2]
-	copy = Copiar('h')
-	print copy
 	p = Problem(pal,pal2)
 	s = p.solution(len(pal2)-1)
 	for i in s:
