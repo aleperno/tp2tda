@@ -98,6 +98,15 @@ class Problem():
 		except IndexError:
 			return None
 
+	def verObj(self,pos):
+		return self.objective[pos]
+
+	def verSigObj(self,pos):
+		try:
+			return self.objective[pos+1]
+		except IndexError:
+			return None
+
 	def copiar(self):
 		c = Copiar(self.verBase())
 		self.posbase += 1
@@ -110,6 +119,11 @@ class Problem():
 		self.cost += Cost().costo('insertar')
 		return [i]
 
+	def terminar(self):
+		t = Terminar()
+		self.cost += Cost().costo('terminar')
+		return [t]
+
 	def intercambiar(self):
 		x = self.verBase()
 		y = self.verSigBase()
@@ -117,6 +131,56 @@ class Problem():
 		self.cost += Cost().costo('intercambiar')
 		self.posbase += 2
 		return [i]
+
+	def reemplazar(self,pos):
+		r = Reemplazar(self.verBase(),self.verObj(pos))
+		self.cost += Cost().costo('reemplazar')
+		self.posbase += 1
+		return [r]
+
+	def checkintercambio(self,pos):
+		"""Evalua si es viable un intercambio"""
+		if pos < len(self.objective):
+			"""Evaluo caso de intercambio"""
+			b1 = self.verBase()
+			b2= self.verSigBase()
+			o1 = self.objective[pos]
+			o2 = self.verSigObj(pos)
+			if (not b2 is None and not o2 is None) and (b1 == o2) and (b2 == o1):
+				print "Hay que intercambiar" 
+				return True
+		return False
+
+	def distcopy(self,pos):
+		"""Mide la distancia al proximo elemento que se pueda copiar"""
+		dist = 0
+		aux = self.posbase #Guardo la posicion original
+		while not self.eob():
+			print "analizando"
+			if self.verBase()==self.verObj(pos):
+				dist = self.posbase - aux
+			self.posbase += 1
+		self.posbase = aux #Vuelvo a colocarlo en su posicion original
+		return dist
+
+	def distinter(self,pos):
+		"""Mide la distancia al proximo intercambio(de ser posible)"""
+		dist = 0
+		aux = self.posbase
+		while not self.eob():
+			if self.checkintercambio(pos):
+				dist = self.posbase - aux
+			self.posbase +=1
+		self.posbase = aux
+		return dist
+
+	def min(self,l):
+		minimo = None
+		for i in l:
+			if (minimo is None) or (i[0]*Cost().costo(i[1]) < Cost().costo(minimo)):
+				minimo = i[1]
+		print "El minimo es %s" % minimo 
+		return minimo
 
 	def solve(self,pos):
 		"""Determina cual es la mejor manera de obtener el caracter actual
@@ -132,17 +196,26 @@ class Problem():
 		if self.verBase() == self.objective[pos]:
 			"""Es el caso de copiar"""
 			print "es el caso de copiar"
-			return self.copiar()
+			aux = self.checkintercambio(pos)
+			"""Evaluo si en vez de copiar se puede intercambiar y si es mas optimo"""
+			if not aux or (aux and self.min([(1,'copiar'),(1,'intercambiar')])=='copiar'):
+				"""Evaluo si en vez de copiar se puede reemplazar"""
+				if (self.min([(1,'copiar'),(1,'reemplazar')])=='copiar'):
+					return self.copiar()
+				else:
+					"""No tiene sentido que reemplazar sea mas eficiente, igual se implementa"""
+					return self.reemplazar(pos)
 
 		if pos < len(self.objective):
-			x = self.verBase()
-			y = self.verSigBase()
-			if (not y is None) and (x == self.objective[pos+1]) and (y == self.objective[pos]):
-				print "Hay que intercambiar" 
-				print "la posicion es %s" % pos
+			"""Evaluo caso de intercambio"""
+			if self.checkintercambio(pos):
 				r = self.intercambiar()
 				self.mem[pos+1]=self.mem[pos-1]+r
 				return r
+
+		"""En este punto tengo que evaluar borrar, insertar o reemplazar"""
+		print "LA DISTANCIA AL PROXIMO INTERCAMBIO ES %s" % self.distinter(pos)
+		return ['false']
 
 	def solution(self,pos):
 		"""Como premisa supongo que ya poseo como conseguir una solucion anterior
@@ -155,6 +228,10 @@ class Problem():
 		if not self.mem.has_key(pos):
 			print "Veo si hay solucion para %s con pos %s" % (self.objective[pos],pos)
 			self.mem[pos] = self.mem[pos-1] + self.solve(pos)
+		if pos == len(self.objective)-1 and not self.eob():
+			"""Ya obtuvimos la solucion y aun hay elementos en la base que deben ser
+			descartados"""
+			self.mem[pos] += self.terminar()
 		return self.mem[pos]
 
 def checkArguments():
@@ -174,7 +251,7 @@ def main():
 	copy = Copiar('h')
 	print copy
 	p = Problem(pal,pal2)
-	s = p.solution(3)
+	s = p.solution(len(pal2)-1)
 	for i in s:
 		print i
 	print "El costo es: %s" % str(p.cost)

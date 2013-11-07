@@ -1,5 +1,5 @@
-copiar:1
-reemplazar:2
+copiar:2
+reemplazar:1
 borrar:3
 insertar:4
 intercambiar:5
