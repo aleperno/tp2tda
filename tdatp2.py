@@ -383,6 +383,6 @@ def main():
 	s = p.solution(len(pal2)-1)
 	for i in s:
 		print i
-	print "\n El costo es: %s" % str(p.cost)
+	print "\nEl costo es: %s" % str(p.cost)
 if __name__ == '__main__':
 	main()
