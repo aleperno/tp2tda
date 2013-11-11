@@ -327,6 +327,12 @@ class Problem():
 		que se encuentre al final de la palabra base
 		O(#base)
 		"""
+
+		if self.verBase()==self.objective[pos+1]:
+			return self.insertar(pos)
+		if self.objective[pos+1]==self.verSigBase():
+			return self.reemplazar(pos)
+			
 		if op == 'borrar':
 			for i in range(0,d): 	#O(d)
 				r += self.borrar()	 #O(1)
