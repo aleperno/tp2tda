@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import LCS
 
 class Cost(object):
 	"""Se utiliza el patron singleton que fue modificado
@@ -91,7 +92,7 @@ class Problem():
 		self.base = pal1
 		self.posbase = 0
 		self.objective = pal2
-		self.res=[]
+		self.lcs= LCS.lcs(pal1,pal2)
 		self.mem={}
 		self.cost=0
 
@@ -386,6 +387,8 @@ def main():
 	pal = sys.argv[1]
 	pal2 = sys.argv[2]
 	p = Problem(pal,pal2)
+	print "La secuencia comun mas larga es: %s" % p.lcs
+	return
 	s = p.solution(len(pal2)-1)
 	for i in s:
 		print i
