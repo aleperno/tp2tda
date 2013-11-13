@@ -328,11 +328,19 @@ class Problem():
 		O(#base)
 		"""
 
-		if self.verBase()==self.objective[pos+1]:
-			return self.insertar(pos)
-		if self.objective[pos+1]==self.verSigBase():
+		if self.verBase()==self.verSigObj(pos):
+			"""
+			Analizo insertar acá, para que la siguiente operacion sea copia.
+			"""
+			if (self.verBase() == self.verSigBase()) and (c4 < c3):
+				"""Implica la posibilidad tambien de reemplazar, analiza costo"""
+				return self.reemplazar(pos)
+			else:
+				return self.insertar(pos)
+
+		if self.verSigBase()==self.verSigObj(pos):
 			return self.reemplazar(pos)
-			
+
 		if op == 'borrar':
 			for i in range(0,d): 	#O(d)
 				r += self.borrar()	 #O(1)

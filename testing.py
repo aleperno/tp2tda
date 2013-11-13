@@ -37,6 +37,9 @@ class Cost(object):
 	def costo(self,op):
 		return self.dict[op]
 
+	def existe(self,op):
+		return self.dict.has_key(op)
+
 """TODAS LAS OPERACIONES SON O(1)"""
 class Copiar():
 	def __init__(self,char):
@@ -93,12 +96,19 @@ class Problem():
 		self.posbase = 0
 		self.objective = pal2
 		self.lcs= LCS.lcs(pal1,pal2)
+		self.poslcs = 0
 		self.mem={}
 		self.cost=0
 
 	"""O(1)"""
 	def eob(self):
 		return self.posbase == len(self.base)
+
+	def verLcs(self):
+		try:
+			return self.lcs[self.poslcs]
+		except IndexError:
+			return None
 
 	"""O(1)"""
 	def verBase(self):
@@ -127,6 +137,7 @@ class Problem():
 		c = Copiar(self.verBase())
 		self.posbase += 1
 		self.cost += Cost().costo('copiar')
+		self.poslcs += 1
 		return [c]
 
 	"""O(1)"""
@@ -168,6 +179,8 @@ class Problem():
 	"""O(1)"""
 	def checkintercambio(self,pos):
 		"""Evalua si es viable un intercambio"""
+		if not Cost().existe('intercambio'):
+			return False
 		if pos < len(self.objective):
 			"""Evaluo caso de intercambio"""
 			b1 = self.verBase()
@@ -265,10 +278,12 @@ class Problem():
 		if self.eob():
 			"""No hay otra opcion más que insertar, ya que se agotaron
 			los caracteres disponibles en la base"""
-			return self.insertar(pos)   #O(1)
+			if Cost().existe('insertar'):
+				return self.insertar(pos)   #O(1)
 
 		#O(1)
-		if self.verBase() == self.objective[pos]: 
+		if (self.verBase() == self.objective[pos] == self.verLcs()) \
+											and Cost().existe('copiar'): 
 			"""Es el caso de copiar"""
 			aux = self.checkintercambio(pos) #O(1)
 			"""Evaluo si en vez de copiar se puede intercambiar y si es mas optimo"""
@@ -276,7 +291,7 @@ class Problem():
 			if not aux or (aux and self.min([(1,'copiar'),(1,'intercambiar')])=='copiar'):
 				"""Evaluo si en vez de copiar se puede reemplazar"""
 				#O(1)
-				if (self.min([(1,'copiar'),(1,'reemplazar')])=='copiar'):
+				if (not Cost().existe('reemplazar'))or(self.min([(1,'copiar'),(1,'reemplazar')])=='copiar'):
 					return self.copiar() #O(1)
 				else:
 					"""No tiene sentido que reemplazar sea mas eficiente, igual se implementa"""
@@ -299,6 +314,14 @@ class Problem():
 					else:
 						pass
 				return r
+
+		if (self.verBase() == self.verLcs() != self.objective[pos]):
+			#print "salchicha %s" % self.verObj(pos)
+			"""El caracter debe guardarse para una futura copia
+			por ende debe insertarse """
+			if Cost().existe('insertar'):
+				return self.insertar(pos)
+
 
 		"""En este punto tengo que evaluar borrar, insertar o reemplazar"""
 
@@ -329,8 +352,8 @@ class Problem():
 		O(#base)
 		"""
 
-		if self.verBase()==self.objective[pos+1]:
-			return self.insertar(pos)
+		#if self.verBase()==self.objective[pos+1]:
+		#	return self.insertar(pos)
 		if self.objective[pos+1]==self.verSigBase():
 			return self.reemplazar(pos)
 			
@@ -387,11 +410,13 @@ def main():
 	pal = sys.argv[1]
 	pal2 = sys.argv[2]
 	p = Problem(pal,pal2)
-	print "La secuencia comun mas larga es: %s" % p.lcs
-	return
+	#print "La secuencia comun mas larga es: %s" % p.lcs
+	#print "Existe la operacion salchicha? %s " % s1.existe('salchicha')
+	#return
 	s = p.solution(len(pal2)-1)
 	for i in s:
 		print i
 	print "\nEl costo es: %s" % str(p.cost)
+	print "Quedan tanto eslementos en labase %s " % p.posbase
 if __name__ == '__main__':
 	main()

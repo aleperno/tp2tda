@@ -2,4 +2,3 @@ copiar:-1
 reemplazar:1
 borrar:2
 insertar:2
-terminar:999
