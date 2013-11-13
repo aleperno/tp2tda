@@ -166,6 +166,8 @@ class Problem():
 	def reemplazar(self,pos):
 		r = Reemplazar(self.verBase(),self.verObj(pos))
 		self.cost += Cost().costo('reemplazar')
+		if (self.verBase()==self.verLcs()):
+			self.poslcs +=1
 		self.posbase += 1
 		return [r]
 
@@ -175,6 +177,25 @@ class Problem():
 		self.posbase += 1
 		self.cost += Cost().costo('borrar')
 		return [b]
+
+	def checkInsertar(self,pos):
+		if not Cost().existe('insertar'):
+			return False
+		aux1=0
+		aux2=0
+		aux1+= Cost().costo('insertar')+Cost().costo('copiar')
+		aux2+= 2 * Cost().costo('reemplazar')
+		if (len(self.base)>=len(self.objective)):
+			if (Cost().existe('borrar')and Cost().existe('terminar')):
+				aux1 += min(Cost().costo('borrar'),Cost().costo('terminar'))
+			elif (Cost().existe('borrar')):
+				aux1 += Cost().costo('borrar')
+			else:
+				aux1 += Cost().costo('terminar')
+		if aux2 < aux1:
+			return False
+		else:
+			return True
 
 	"""O(1)"""
 	def checkintercambio(self,pos):
@@ -282,7 +303,7 @@ class Problem():
 				return self.insertar(pos)   #O(1)
 
 		#O(1)
-		if (self.verBase() == self.objective[pos] == self.verLcs()) \
+		if (self.verBase() == self.objective[pos]) \
 											and Cost().existe('copiar'): 
 			"""Es el caso de copiar"""
 			aux = self.checkintercambio(pos) #O(1)
@@ -296,6 +317,14 @@ class Problem():
 				else:
 					"""No tiene sentido que reemplazar sea mas eficiente, igual se implementa"""
 					return self.reemplazar(pos) #O(1)
+		
+		if (self.verBase() != self.verLcs() and self.verBase() != self.verObj(pos)):
+			if Cost().existe('reemplazar'):
+				if Cost().existe('borrar') and (self.verSigBase()==self.verLcs()) and (Cost().costo('borrar')+Cost().costo('copiar')<=Cost().costo('reemplazar')):
+					return self.borrar()+self.solve(pos)
+				else:
+					return self.reemplazar(pos)
+
 
 		#O(1)
 		if pos < len(self.objective):
@@ -319,9 +348,13 @@ class Problem():
 			#print "salchicha %s" % self.verObj(pos)
 			"""El caracter debe guardarse para una futura copia
 			por ende debe insertarse """
-			if Cost().existe('insertar'):
+			if Cost().existe('insertar') and self.checkInsertar(pos):
 				return self.insertar(pos)
+			elif Cost().existe('reemplazar'):
+				return self.reemplazar(pos)
 
+		if (Cost().existe('borrar') and self.verBase()!=self.verObj(pos) and self.verSigBase()==self.verLcs()):
+			return self.borrar()+self.solve(pos)
 
 		"""En este punto tengo que evaluar borrar, insertar o reemplazar"""
 
@@ -354,8 +387,8 @@ class Problem():
 
 		#if self.verBase()==self.objective[pos+1]:
 		#	return self.insertar(pos)
-		if self.objective[pos+1]==self.verSigBase():
-			return self.reemplazar(pos)
+		#if self.objective[pos+1]==self.verSigBase():
+		#	return self.reemplazar(pos)
 			
 		if op == 'borrar':
 			for i in range(0,d): 	#O(d)
