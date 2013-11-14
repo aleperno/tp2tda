@@ -320,8 +320,10 @@ class Problem():
 		
 		if (self.verBase() != self.verLcs() and self.verBase() != self.verObj(pos)):
 			if Cost().existe('reemplazar'):
-				if Cost().existe('borrar') and (self.verSigBase()==self.verLcs()) and (Cost().costo('borrar')+Cost().costo('copiar')<=Cost().costo('reemplazar')):
-					return self.borrar()+self.solve(pos)
+				if Cost().existe('borrar') and (self.verSigBase()==self.verObj(pos)) and (Cost().costo('borrar')+Cost().costo('copiar')<Cost().costo('reemplazar')):
+					r += self.borrar()
+					r += self.solve(pos)
+					return r
 				else:
 					return self.reemplazar(pos)
 
@@ -354,6 +356,7 @@ class Problem():
 				return self.reemplazar(pos)
 
 		if (Cost().existe('borrar') and self.verBase()!=self.verObj(pos) and self.verSigBase()==self.verLcs()):
+			print "sarasaaa"
 			return self.borrar()+self.solve(pos)
 
 		"""En este punto tengo que evaluar borrar, insertar o reemplazar"""
