@@ -1,0 +1,4 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Enunciado}{3}
+\contentsline {subsection}{\numberline {1.1}Distancia de edici\IeC {\'o}n}{4}
+\contentsline {subsection}{\numberline {1.2}Alineaci\IeC {\'o}n secuencias ADN}{4}

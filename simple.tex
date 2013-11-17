@@ -4,6 +4,13 @@
 \usepackage{amsfonts}
 \usepackage[utf8]{inputenx}
 \usepackage{listings}
+
+\usepackage{color}
+\definecolor{deepblue}{RGB}{0,0,153}
+\definecolor{deepred}{RGB}{153,0,0}
+\definecolor{deepgreen}{RGB}{51,102,0}
+\definecolor{deepyellow}{RGB}{204,204,0}
+
 \lstset{ %
 			language=Python,
 			basicstyle=\footnotesize,
@@ -11,6 +18,10 @@
 			stepnumber=1,
 			numbersep=4pt,
 			tabsize=2,
+			otherkeywords={self}, 
+			keywordstyle=\color{deepred},
+			stringstyle=\color{deepgreen},
+			commentstyle=\color{deepblue},
 }
 
 
@@ -26,4 +37,92 @@
 
 \begin{document}
 \maketitle
+
+\newpage
+\tableofcontents
+
+\newpage
+
+\section{Enunciado}
+\textbf{\underline{Distancia de edición}}
+Para convertir una cadena de caracteres x [1..m ] en otra cadena y [1..n ] , se pueden
+realizar distintas operaciones. La meta consiste, en dadas las cadenas x e y ,
+encontrar una serie de transformaciones para cambiar x en y , para lo cual debemos
+emplear un vector z (cuyo tamaño asumimos que es suficiente para almacenar todos los
+caracteres necesarios) en el que almacenaremos los resultados parciales. Al inicio z
+está vacío y al final se cumple que z [ j ]= y [ j] para j=1,2 , ... , n . Se deben examinar
+todos los caracteres de x , para lo cual se mantienen los índices i en x y j en z .
+En un principio i= j=1 y al final i=m+ 1 . En cada paso se aplica alguna de las
+siguientes seis operaciones (transformaciones):
+\\\\
+\textbf{Copiar:}copia un carácter de x a z . Esto es: z [ j ]= x [i ] e incrementa los índices i
+yj
+\\\\
+\textbf{Reemplazar:}reemplaza un carácter de x por otro carácter c . Esto es: z [ j ]=c e
+incrementa los índices i y j
+\\\\
+\textbf{Borrar:}borra un carácter de x incrementando i y sin mover j
+\\\\
+\textbf{Insertar:} inserta un carácter c en z . Esto es: z [ j ]=c e incrementa j sin mover i
+\\\\
+\textbf{Intercambiar:} intercambia los próximos dos caracteres copiándolos de x a z pero en
+orden inverso. Esto es: z [ j ]= x [i+ 1] y z [ j +1]= x [i ] e incrementa los índices de la
+siguiente manera: i=i+2 y j= j+2
+\\\\
+\textbf{Terminar:} elimina los caracteres restantes de x haciendo i=m+ 1 . Esta operación
+descarta todos los caracteres de x que todavía no se analizaron. Es la última operación
+se aplica si hace falta.
+
+\newpage
+\subsection{Distancia de edición}
+Dadas dos cadenas x [1..m] e y [1..n ] y el costo de cada una de las operaciones
+. Escribir un programa (programación dinámica) que calcule la distancia de edición
+siendo esta la secuencia de menor costo que permita transformar x en y .
+Analizar la complejidad en tiempo y espacio de la solución implementada.
+El programa debe tomar como parámetros las dos cadenas y el nombre de un
+archivo con el costo de las operaciones. El formato de cada línea de este archivo
+es el siguiente:
+
+\verb# <operacion>:<costo>#
+
+Ejemplo de invocación: \emph{tdatp2 algoritmo altruista costos.txt}
+
+La salida debe ser por pantalla y debe mostrar una línea por cada operación,
+indicando los caracteres que se insertan o reemplazan. Una línea en blanco y el costo total de
+la secuencia.
+
+\subsection{Alineación secuencias ADN}
+El problema de la distancia de edición, tal como está planteado en este TP generaliza el
+problema de alinear dos secuencias de ADN. Existen varios métodos para medir la
+similitud entre dos secuencias de ADN alineándolas. Uno de esos métodos consiste en
+insertar espacios en posiciones arbitrarias en ambas secuencias (incluyendo al final) tal
+que las secuencias resultantes tengan la misma longitud pero que no tengan espacios en
+la misma posición. Entonces se le asigna un puntaje a cada posición de la siguiente
+manera:
+
+\begin{itemize}
+	\item +1 si $x'[j]=y'[j]$ y ninguno es un espacio
+	\item -1 si $x'[j]\neq y'[j]$ y ninguno es un espacio
+	\item -1 si $x'[j]$ o $y'[j]$ es un espacio
+\end{itemize}
+
+El puntaje total de la alineación es la suma de los puntaje de cada posición. Por ejemplo
+dadas las secuencias x=GATCGGCAT e y=CAATGTGAATC, una alineación posible
+es:
+\[
+\begin{array}{ccccccccccccc}
+  &G &\space &A &T &C &G &\space &G &C &A &T &\space  \\
+  &C &A &A &T &\space &G &T &G &A &A &T &C	\\
+  &-1 &-2 &+1 &+1 &-2 &+1 &-2 &+1 &-1 &+1 &+1 &-2
+\end{array}
+\]
+Tal que el puntaje total de la alineación es $6*1-2*1-4*2=-4$
+Explicar que como utilizar el programa de distancia de edición del punto 1
+utilizando un subconjunto de las operaciones copiar, reemplazar, borrar, insertar,
+intercambiar y terminar para resolver el problema de la alineación de secuencias de
+ADN con el método dado.
+
+
+\newpage
+\lstinputlisting{testing2.py}
 \end{document}
