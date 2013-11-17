@@ -101,6 +101,8 @@ class Problem():
 		self.diff = len(pal2)-len(pal1) #O(1) according to Python Wiki
 		self.cost=0
 		self.term = False if (self.diff >= 0) else True
+		self.inser = self.diff if (self.diff > 0) else 0
+		self.borr = self.diff if (self.diff < 0) else 0
 
 	"""O(1)"""
 	def eob(self):
@@ -218,6 +220,9 @@ class Problem():
 
 	def aReemplazar(self,pos):
 		costo=Cost().costo('reemplazar')
+
+		if self.verBase()==self.verLcs():
+			costo+=Cost().costo('reemplazar') if Cost().existe('terminar') else 0
 		if self.verSigBase()==self.verSigObj(pos):
 			costo+=Cost().costo('copiar')
 		else:
@@ -375,7 +380,7 @@ class Problem():
 				#Evaluo borrar, y la siguiente operacion seria una copia
 				costoBorrar = self.aBorrar(pos)
 			costoReemplazar = self.aReemplazar(pos)
-			op = self.min2([(costoInsertar,'i'),(costoBorrar,'b'),(costoReemplazar,'r')])
+			op = self.min2([(costoReemplazar,'r'),(costoInsertar,'i'),(costoBorrar,'b')])
 			if op == 'r':
 				return self.reemplazar(pos)
 			elif op == 'b':
@@ -477,6 +482,7 @@ def main():
 	#print "Existe la operacion salchicha? %s " % s1.existe('salchicha')
 	#return
 	s = p.solution(len(pal2)-1)
+	print "Se deben hacer %s inserciones" % p.inser
 	for i in enumerate(s):
 		print i[0]+1,')',i[1]
 	print "\nEl costo es: %s" % str(p.cost)
