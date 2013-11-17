@@ -368,8 +368,7 @@ class Problem():
 			costoInsertar = None
 			costoBorrar = None
 			costoReemplazar = None
-
-			if self.verBase() == self.verLcs() == self.verSigObj(pos):
+			if self.verBase() == self.verLcs():
 				#Evaluo insertar, y la siguiente operacion seria una copia
 				costoInsertar = self.aInsertar(pos)
 			if self.verSigBase() == self.verLcs() :				
