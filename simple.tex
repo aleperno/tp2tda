@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+
+\usepackage[spanish]{babel}
+\usepackage{amsfonts}
+\usepackage{listings}
+\lstset{ %
+			language=Python,
+			basicstyle=\footnotesize,
+			numbers=left,
+			stepnumber=1,
+			numbersep=4pt,
+			tabsize=2,
+}
+
+
+\title{Problema de tu vieja}
+\author{
+        Ignacio Garay \\
+                \and
+        Ariel Liguori\\
+        	\and
+	Pablo Musumeci
+}
+\date{\today}
+
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+El presente es un an\'alisis sobre el problema de Scheduling planteado para n streams, con una restricci\'on de env\'io
+con dependencia temporal. Se analizar\'an dos tipos de algoritmos con diferentes tiempos de ejecuci\'on y la estrategia empleada.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introducci\'on}\label{intro}
+El problema del scheduling fue planteado originalmente para la asignaci\'on de recursos a una m\'aquina. El planteo
+b\'asico dice que se cuenta con un conjunto de operaciones a realizar, donde cada una tiene un tiempo de inicio y un
+tiempo de finalizaci\'on. El problema a resolver es el de encontrar un conjunto de tareas a realizar tal que la cantidad
+de tareas a realizar sea m\'axima.\\
+El problema planteado en el siguiente documento es una variaci\'on del mismo. Se cuenta con un conjunto de tareas a realizar pero sin ninguna restricci\'on del estilo temporal. Es decir, no existe ni un tiempo de inicio ni de fin, sino que
+contamos con una \emph{cantidad de producto} a procesar en conjunto con el \emph{tiempo que demorar\'a} en procesarlo.
+ En nuestro caso, el producto a ser procesado son bits y nuestra m\'aquina es el servicio de streaming. Nuestra m\'aquina presenta una restricci\'on particular con respecto al env\'io de bits; presenta una restricci\'on $r, r > 0$ tal que para todo $t > 0$ entonces se debe cumplir que $bit_{env} <= r * t$, donde el tiempo inicial $t = 0$ es el instante en que comienza la primer transmisi\'on.
+\newpage
+\section{Planteo}\label{planteo}
+El planteo matem\'atico del problema consiste en que conocemos nuestro conjunto de streams $S, S = \{(bits_i,t_i)\} , i \in [1..n]$, donde $(bits_i,t_i)$ representan cada stream individual y tenemos n strings en total.
+Dicho conjunto se encuentra asociado a una constante $r, r > 0$ tal que $\forall t > 0,  \sum\limits_{i=1}^n bits_i \leq r * t $.\\
+Nuestro problema consiste en encontrar alguna relaci\'on o identidad que nos permita asegurar que para toda soluci\'on 
+existe una restricci\'on que debe cumplirse. Entonces, plantearemos la soluci\'on con un modelo greedy, donde eligiremos
+nuestra regla greedy y diremos que todo conjunto ser\'a v\'alido o no seg\'un la misma.\\
+En el caso del algoritmo de orden \emph{O(n log n)} se pens\'o que para un conjunto ordenado es m\'as f\'acil encontrar una soluci\'on. Entonces, adoptamos la estrategia de convertir nuestros conjuntos a un conjunto ordenado de forma
+ascendente, tomando como criterio de comparaci\'on la cantidad de bits a emitir. Una vez convertido el conjunto, se
+procede a recorrer linealmente el mismo y se va comprobando elemento a elemento que se verifique la condici\'on enunciada al principio de la secci\'on. Notar que si la restricci\'on se cumple para todos los elementos del set ordenado, el set ordenado es una soluci\'on al problema de scheduling.\\
+En el caso del algoritmo de orden \emph{O(n)} nos basamos en:\\
+\\\begin {math} C = \{(b_i, t_i)\}, i \in [1, n]. Si  \sum\limits_{i=1}^n bits_i \leq \sum\limits_{i=1}^n r * t_i \Rightarrow C \in V_{solucion} \end{math}\\
+\\
+La demostraci\'on de dicha propiedad se presenta por el absurdo. Pero antes enunciaremos dos lemas que nos resultar\'an fundamentales para la demostraci\'on:
+\begin{itemize}
+	\item Todo conjunto $C$ tiene un equivalente ordenado $C'$ bajo la relaci\'on de \'orden $a,b \in C, bits_a <= bits_b$.
+	\item Sea C' el conjunto ordenado asociado a C. Si el espacio soluci\'on no es vac\'io, C' se encuentra en el mismo.
+\end{itemize}
+Ahora procedemos a demostrar nuestra regla de decisi\'on. Supongamos que existe un conjunto $C$ que tiene soluci\'on al
+ problema de scheduling. Supongamos tambi\'en que nuestro conjunto no cumple con la condici\'on impuesta. Es decir $\sum\limits_{i=1}^n bits_i > \sum\limits_{i=1}^n r * t_i$.
+ Ahora bien, por lema sabemos que $\exists C'$ tal que $C'$ esta ordenado y $C' \in S_{sol}$ por pertenecer C al espacio soluci\'on. Si $C' \in S_{sol}$ entonces se debe cumplir que 
+$\forall t > 0, \sum\limits_{j = 1}^k b_j <= r * t, \forall k \in [1..n]$. En particular, para el en\'esimo elemento tenemos que $\sum\limits_{j = 1}^n b_j <= r * \sum\limits_{j = 1}^n t_i$, que se contradice con nuestra hip\'otesis. Dicho
+absurdo se presenta por suponer que existe una soluci\'on que no cumpliese con nuestra restricci\'on, entonces queda demostrada la propiedad requerida.
+\newpage
+\section{Dise\~no}\label{diseño}
+Hubo dos partes del diseño de la soluci\'on, una global que fue el diseño de las estructuras a utilizar y otra particular de cada algoritmo. En un principio se defini\'o una clase que modelizara los elementos de nuestro conjunto teniendo en cuenta la relaci\'on de orden especificada. Este contenedor ser\'a compartido por ambos algoritmos. Ambos algoritmos reciben una lista de los elementos previamente mencionados y el valor de la restricci\'on de nuestro conjunto.\\
+En lo que a diseño se refiere, se eligi\'o una soluci\'on greedy en ambos algoritmos. Como ya se mencion\'o, elegimos dos reglas greedy de decisi\'on y aproximamos la soluci\'on con la misma. Por la forma de tomar la regla de decisi\'on, resulta que las soluciones son \'optimas.\\
+Con respecto al algoritmo O(n log n), el mismo obtiene su cota m\'axima del algoritmo de ordenamiento a utilizar, el Timsort\footnote{Ver secci\'on \ref{timsort}}, que posee tiempos de O(n log n) y o(n). Una vez obtenido el conjunto ordenado, se procede a iterarlo linealmente calculando las sumas acumuladas, agregando de a uno los elementos a una lista soluci\'on. Si llegara a darse que algun elmento no cumpliese con la suma acumulada, quiere decir que la soluci\'on no es v\'alida. Caso contrario, nos encontramos en condiciones de devolver el conjunto soluci\'on. Todas las dem\'as operaciones utilizadas son de orden menor a n log n. Las mismas son:
+
+\begin{itemize}
+	\item Iterar una lista: O(n)
+	\item Agregar \'ultimo a una lista anidado en un ciclo: O(1)
+	\item Operaciones aritm\'eticas y comparaciones: O(1)
+\end{itemize}
+
+En lo que se refiere al algoritmo lineal, el algoritmo es mucho mas simple. Se calcula la suma acumulada de bits y de tiempos y despu\'es se aplica la regla greedy para saber si el set es v\'alido o no. Notar que con \'este algoritmo no se puede obtener la soluci\'on, sino que es un algoritmo que niega o no la existencia de una soluci\'on. Debido a que la operaci\'on m\'as costosa que se realizar\'a ser\'a la iteraci\'on sobre una lista, el \'orden del mismo es O(n).
+
+\section{Algoritmos}\label{algoritmos}
+\subsection{Algoritmo O(n log(n)}
+
+
+\subsection{Algoritmo O(n)}
+
+\newpage
+
+\section{An\'alisis}\label{analisis}
+Como podemos ver, el primer algoritmo se encuentra acotado por la operaci\'on de mayor costo, que es el ordenamiento.
+Debido a que el Timsort es un ordenamiento por comparaci\'on, su cota m\'axima es de n log n, siendo n la cantidad de streams. El resto de las operaciones son iterar sobre un set, operaciones aritm\'eticas y comparaciones tienen un tiempo de ejecuci\'on menor a n log n (n y 1 respectivamente).\\
+Como se plante\'o en la seccion de Planteo, lo que tiene de interesante de la elecci\'on del algoritmo greedy y de la regla de decisi\'on es que la soluci\'on es una \'optima.\\
+Otro tema importante a destacar que el algoritmo lo que hace es verificar si el set es v\'alido y si lo llega a ser, devuelve el set soluci\'on, obteniendo mucha m\'as informaci\'on del problema de la que me podr\'ia llegar a proveer el algoritmo lineal.\\
+Con respecto al algoritmo lineal, se puede destacar que, debido a una regla de decisi\'on simple pero poderosa, se logra simplificar el problema. Aunque en el proceso se descarta mucha informaci\'on (como el \'orden de streams), a\'un podemos obtener una soluci\'on \'optima. El tiempo de ejecuci\'on del mismo queda acotado a la iteraci\'on sobre el set de streams. Este costo es n, siendo n la cantidad de elementos del set.\\
+Como conclusi\'on importante se puede destacar que para reducir la cota algor\'itmica hubo que resignar la informaci\'on adicional que el algoritmo m\'as lento prove\'ia. Esto se puede entender debido a que la regla de decisi\'on del algoritmo lineal es en efecto mucho m\'as fuerte y restrictiva que la emplada para el otro algoritmo.\\
+Es a destacar que se puede reducir la cota inferior del primer algoritmo, haciendo un primer recorrido del set e incorporando los elementos v\'alidos a mi set soluci\'on y los rechazados a un heap minimal. Si al final de la pasada quedan elementos pendientes, se procede a sacar todo elemento rechazado del heap minimal, agreg\'andolo al set soluci\'on. Si alg\'un elemento sacado del heap no puede ser incorporado al set soluci\'on, implica que el set no es un set v\'alido.
+
+\newpage
+
+\section{Ap\'endice: Timsort}\label{timsort}
+El algoritmo de Timsort es un derivado del Mergesort. Entre alguenas de las distinciones m\'as notables entra la capacidad
+de reconocer patrones ordenados dentro de la lista. En vez de tomar particiones de un n\'umero fijo de elementos,
+ particiona el espacio de la lista seg\'un los \'ordenes parciales que pueda llegar a tener adentro. Esto permite que en
+ casos donde la lista contiene elementos ordenados de forma parcial o una lista pr\'acticamente ordenada salvo por elementos que distorcionan, se logre una forma de ordenar muy r\'apida. Se dice que el Timsort es un algoritmo adaptativo porque
+se encuentra optimizado para casos de pocos elementos, cambiando a un insertionsort. El comportamiento del Timsort en el peor caso se encuentra en el que la entrada sea completamente random, sin ninguna clase de ordenamiento parcial. En ese
+caso, el Timsort, luego de una primer pasada lineal para encontrar runs, decanta en un mergesort.\\
+Esto se debe a que el Timsort tiene como invariante de que en la pila donde se almacenan los runs no pueda superar los 
+$log(n)$ elementos. Para lograr esto, se pide como invariante que $tam_i <= 2 * tam_{i+1}$. Entonces de esta forma, en 
+el peor de los casos, estar\'iamos haciendo $log(n)$ mezclas en tiempo $n$, debido a que la forma de mezclar es lineal.
+En consecuencia, el algoritmo en el peor caso estar\'ia ordenando en $O(n*log(n))$.
+
+\bibliographystyle{abbrv}
+\bibliography{simple}
+
+\newpage
+\section{Anexo: implementaci\'on de los algoritmos en Python}\label{codigo}
+\subsection{schedule.py}
+\lstinputlisting{schedule.py}
+\newpage
+\end{document}
