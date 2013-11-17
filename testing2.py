@@ -100,6 +100,7 @@ class Problem():
 		self.mem={}
 		self.diff = len(pal2)-len(pal1) #O(1) according to Python Wiki
 		self.cost=0
+		self.term = False if (self.diff >= 0) else True
 
 	"""O(1)"""
 	def eob(self):
@@ -146,6 +147,15 @@ class Problem():
 		char = self.objective[pos]
 		i = Insertar(char)
 		self.cost += Cost().costo('insertar')
+		_terminar = Cost().existe('terminar')
+		_borrar = Cost().existe('borrar')
+		if self.diff >= 0:
+			if not _borrar and _terminar:
+				self.term = True
+			elif _borrar and _terminar:
+				minim = min(Cost().costo('borrar'),Cost().costo('terminar'))
+				if minim == Cost().costo('terminar'):
+					self.term = True
 		return [i]
 
 	"""O(1)"""
@@ -179,24 +189,40 @@ class Problem():
 		self.cost += Cost().costo('borrar')
 		return [b]
 
-	def checkInsertar(self,pos):
-		if not Cost().existe('insertar'):
-			return False
-		aux1=0
-		aux2=0
-		aux1+= Cost().costo('insertar')+Cost().costo('copiar')
-		aux2+= 2 * Cost().costo('reemplazar')
-		if (len(self.base)>=len(self.objective)):
-			if (Cost().existe('borrar')and Cost().existe('terminar')):
-				aux1 += min(Cost().costo('borrar'),Cost().costo('terminar'))
-			elif (Cost().existe('borrar')):
-				aux1 += Cost().costo('borrar')
+	def aInsertar(self,pos):
+		#Se analiza el costo de insertar, se supone que la prox seria copia sino no conviene insertar
+		costo = Cost().costo('insertar')+Cost().costo('copiar')
+		_terminar = Cost().existe('terminar')
+		_borrar = Cost().existe('borrar')
+		if self.diff <= 0:
+			#Insertar implica que deba o borrar o terminar
+			if not _borrar and _terminar:
+				costo += Cost().costo('terminar') if not self.term else 0
+			elif not _terminar and _borrar:
+				costo += Cost().costo('borrar')
 			else:
-				aux1 += Cost().costo('terminar')
-		if aux2 < aux1:
-			return False
+				step = min(Cost().costo('terminar'),Cost().costo('borrar'))
+				if step == Cost().costo('terminar'):
+					costo += step if not self.term else 0
+				else:
+					costo += step
+
+		return costo
+
+	def aBorrar(self,pos):
+		costo = Cost().costo('borrar')+Cost().costo('copiar')
+		if self.diff >= 0:
+			#Borrar implica insertar
+			costo += Cost().costo('insertar')
+		return costo
+
+	def aReemplazar(self,pos):
+		costo=Cost().costo('reemplazar')
+		if self.verSigBase()==self.verSigObj(pos):
+			costo+=Cost().costo('copiar')
 		else:
-			return True
+			costo+=Cost().costo('reemplazar')
+		return costo
 
 	"""O(1)"""
 	def checkintercambio(self,pos):
@@ -319,17 +345,6 @@ class Problem():
 					"""No tiene sentido que reemplazar sea mas eficiente, igual se implementa"""
 					return self.reemplazar(pos) #O(1)
 		
-		if (self.verBase() != self.verLcs() and self.verBase() != self.verObj(pos)):
-			if Cost().existe('reemplazar'):
-				if Cost().existe('borrar') and (self.verSigBase()==self.verObj(pos)) and not (self.verObj(pos) == self.verSigObj(pos)):
-					r += self.borrar()
-					r += self.solve(pos)
-					return r
-				else:
-					print 'Estoy reemplazando %s' % self.verObj(pos)
-					return self.reemplazar(pos)
-
-
 		#O(1)
 		if pos < len(self.objective):
 			"""Evaluo caso de intercambio"""
@@ -348,21 +363,30 @@ class Problem():
 						pass
 				return r
 
-		if (Cost().existe('borrar') and self.verBase()!=self.verObj(pos) and self.verSigBase()==self.verLcs()):
-			print "sarasaaa"
-			return self.borrar()+self.solve(pos)
+		"""Vemos que onda"""
+		if Cost().existe('copiar'):
+			costoInsertar = None
+			costoBorrar = None
+			costoReemplazar = None
 
-		if (self.verBase() == self.verLcs() != self.objective[pos]):
-			#print "salchicha %s" % self.verObj(pos)
-			"""El caracter debe guardarse para una futura copia
-			por ende debe insertarse """
-			if Cost().existe('insertar') and self.checkInsertar(pos):
-				return self.insertar(pos)
-			elif Cost().existe('reemplazar'):
+			if self.verBase() == self.verLcs() == self.verSigObj(pos):
+				#Evaluo insertar, y la siguiente operacion seria una copia
+				costoInsertar = self.aInsertar(pos)
+			if self.verSigBase() == self.verLcs() :				
+				#Evaluo borrar, y la siguiente operacion seria una copia
+				costoBorrar = self.aBorrar(pos)
+			costoReemplazar = self.aReemplazar(pos)
+			op = self.min2([(costoInsertar,'i'),(costoBorrar,'b'),(costoReemplazar,'r')])
+			if op == 'r':
 				return self.reemplazar(pos)
+			elif op == 'b':
+				r += self.borrar()
+				r += self.solve(pos,r)
+				return r
+			else:
+				return self.insertar(pos)
 
-
-
+		print "EN ALGO LA RECONTRA CAGUE"
 		"""En este punto tengo que evaluar borrar, insertar o reemplazar"""
 
 		d = None
