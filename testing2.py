@@ -98,6 +98,7 @@ class Problem():
 		self.lcs= LCS.lcs(pal1,pal2)
 		self.poslcs = 0
 		self.mem={}
+		self.diff = len(pal2)-len(pal1) #O(1) according to Python Wiki
 		self.cost=0
 
 	"""O(1)"""
@@ -320,11 +321,12 @@ class Problem():
 		
 		if (self.verBase() != self.verLcs() and self.verBase() != self.verObj(pos)):
 			if Cost().existe('reemplazar'):
-				if Cost().existe('borrar') and (self.verSigBase()==self.verObj(pos)) and (Cost().costo('borrar')+Cost().costo('copiar')<Cost().costo('reemplazar')):
+				if Cost().existe('borrar') and (self.verSigBase()==self.verObj(pos)) and not (self.verObj(pos) == self.verSigObj(pos)):
 					r += self.borrar()
 					r += self.solve(pos)
 					return r
 				else:
+					print 'Estoy reemplazando %s' % self.verObj(pos)
 					return self.reemplazar(pos)
 
 
@@ -346,6 +348,10 @@ class Problem():
 						pass
 				return r
 
+		if (Cost().existe('borrar') and self.verBase()!=self.verObj(pos) and self.verSigBase()==self.verLcs()):
+			print "sarasaaa"
+			return self.borrar()+self.solve(pos)
+
 		if (self.verBase() == self.verLcs() != self.objective[pos]):
 			#print "salchicha %s" % self.verObj(pos)
 			"""El caracter debe guardarse para una futura copia
@@ -355,9 +361,7 @@ class Problem():
 			elif Cost().existe('reemplazar'):
 				return self.reemplazar(pos)
 
-		if (Cost().existe('borrar') and self.verBase()!=self.verObj(pos) and self.verSigBase()==self.verLcs()):
-			print "sarasaaa"
-			return self.borrar()+self.solve(pos)
+
 
 		"""En este punto tengo que evaluar borrar, insertar o reemplazar"""
 
@@ -450,8 +454,8 @@ def main():
 	#print "Existe la operacion salchicha? %s " % s1.existe('salchicha')
 	#return
 	s = p.solution(len(pal2)-1)
-	for i in s:
-		print i
+	for i in enumerate(s):
+		print i[0]+1,')',i[1]
 	print "\nEl costo es: %s" % str(p.cost)
 	print "Quedan tanto eslementos en labase %s " % p.posbase
 if __name__ == '__main__':
