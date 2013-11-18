@@ -412,7 +412,7 @@ O(#pal1 * #pal2) + O(#pal2) < 2 O(#pal1 * #pal2)
 O(#pal1 * #pal2)
 """
 def main():
-	print "Teoria y Algoritmos 1 - [75.29]"
+	print "Teoria de Algoritmos 1 - [75.29]"
 	print "TP2 - Distancia de Edicion"
 	print "Autores: Alejandro Pernin (92216) - Lautaro Medrano (90009)\n"
 	s1 = Cost(file_source=sys.argv[3])

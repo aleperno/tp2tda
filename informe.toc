@@ -1,14 +1,15 @@
 \select@language {spanish}
-\contentsline {section}{\numberline {1}Enunciado}{3}{section.1}
-\contentsline {subsection}{\numberline {1.1}Distancia de edici\IeC {\'o}n}{4}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}Alineaci\IeC {\'o}n secuencias ADN}{4}{subsection.1.2}
-\contentsline {section}{\numberline {2}Resoluci\IeC {\'o}n}{6}{section.2}
-\contentsline {subsection}{\numberline {2.1}Distancia de edici\IeC {\'o}n}{6}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Alineaci\IeC {\'o}n secuencias ADN}{7}{subsection.2.2}
-\contentsline {section}{\numberline {3}An\IeC {\'a}lisis de orden}{9}{section.3}
-\contentsline {section}{\numberline {4}Ejecuci\IeC {\'o}n y pruebas}{10}{section.4}
-\contentsline {section}{\numberline {5}Conclusiones}{11}{section.5}
-\contentsline {section}{\numberline {6}Reformas respecto 1\IeC {\textordmasculine } informe}{12}{section.6}
-\contentsline {section}{\numberline {7}Codigos Fuente}{13}{section.7}
-\contentsline {subsection}{\numberline {7.1}LCS.py}{13}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}tdatp2.py}{14}{subsection.7.2}
+\contentsline {section}{\numberline {1}Enunciado}{4}{section.1}
+\contentsline {subsection}{\numberline {1.1}Distancia de edici\IeC {\'o}n}{5}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Alineaci\IeC {\'o}n secuencias ADN}{5}{subsection.1.2}
+\contentsline {section}{\numberline {2}Resoluci\IeC {\'o}n}{7}{section.2}
+\contentsline {subsection}{\numberline {2.1}Distancia de edici\IeC {\'o}n}{7}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Alineaci\IeC {\'o}n secuencias ADN}{8}{subsection.2.2}
+\contentsline {section}{\numberline {3}An\IeC {\'a}lisis de orden}{10}{section.3}
+\contentsline {section}{\numberline {4}Ejecuci\IeC {\'o}n y pruebas}{11}{section.4}
+\contentsline {section}{\numberline {5}Conclusiones}{12}{section.5}
+\contentsline {section}{\numberline {6}Modificaciones}{13}{section.6}
+\contentsline {section}{\numberline {7}Referencias}{14}{section.7}
+\contentsline {section}{\numberline {8}Codigos Fuente}{15}{section.8}
+\contentsline {subsection}{\numberline {8.1}LCS.py}{15}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}tdatp2.py}{16}{subsection.8.2}

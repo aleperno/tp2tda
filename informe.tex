@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenx}
 \usepackage{algorithm2e}
 \usepackage{listings}
+\usepackage{pdfpages}
 
 \usepackage{color}
 \definecolor{deepblue}{RGB}{0,0,153}
@@ -46,6 +47,8 @@
 
 
 \begin{document}
+\includepdf{caratula.pdf}
+
 \maketitle
 
 \newpage
@@ -291,6 +294,8 @@ encuentra en el código fuente\footnote{Ver \ref{sec:sourcecode}}.
 	\item La solución total se compone de efectuar un llamado a LCS y a 
 	solution(), siendo $O(|obj|)<O(|obj|*|base|)$ por propiedades de O
 	la cota superior de todo el problema es $O(|base|*|obj|)$
+	
+	Si tomamos $N=max\{|base|,|obj|\}$ podemos decir que $O(|base|*|obj|)<O(N^{2})$
 \end{itemize}
 
 \newpage
@@ -329,10 +334,46 @@ encuentra en el código fuente\footnote{Ver \ref{sec:sourcecode}}.
 	Se hace un análisis del entorno del problema, para analizar las 
 	posibles implicancias de una operación y preveer costos a futuro
 	que puede acarrear efectuar la misma.
+	
+	Se utilizaron estructuras que al a vez de permitir almacenar en 
+	memoria soluciones parciales del problema, permitan tener un acceso
+	a las mismas en un tiempo óptimo.
+	
+	Asimismo se analizó de que manera con sólo modificar los datos de 
+	entrada y haciendo una conversión del resultado; se puede utilizar 
+	el mismo algoritmo para solucionar un problema para el cual no fue
+	diseñado originalmente.
+	
+	Se obtuvo un algoritmo que obtiene una solución en un tiempo polinomial $O(N^{2})$.
 
 \newpage
-\section{Reformas respecto 1º informe}
+\section{Modificaciones}
+	La solución acá presente es el resultado de la modificación de una
+	solución planteada con anterioridad, pero que no cumplia ciertos
+	objetivos. A continuación se detallan algunas de las modificaciones:
+	\begin{itemize}
+		\item La solución anterior no era óptima, se analizaban las condiciones
+		locales caracter a caracter, no teniendo en cuenta las futuras 
+		implicancias de una operación. Por lo que aún siendo una operación
+		óptima para la obtención del carácter deseado, esa operación a 
+		futuro podría acarrear realizar operaciones que aumetasen el costo
+		total.
+		\item Con razón de proveer de información para la toma de decisiones
+		necesarias descriptas en el item anterior, se añadió implementó
+		el algoritmo de LCS.
+		\item Se considera la posibilidad de prohibir operaciones.
+		\item Se efectua un análisis más global del contexto del programa
+		(diferencia de tamaños, operaciones previas, etc).
+	\end{itemize}
 
+\newpage
+\section{Referencias}
+	\begin{itemize}
+		\item Wikipedia: Big O Notation - \url{http://en.wikipedia.org/wiki/Big_O_notation}
+		\item Python Wiki: Time Complexity - \url{https://wiki.python.org/moin/TimeComplexity}
+		\item `Introduction to Algorithms'- Cormen, Leiserson, Rivest, Stein -(ISBN:0-262-03293-7)
+		\item `Algorithm Desing' - Kleinberg, Tardos - (ISBN: 0-321-29535-8)
+	\end{itemize}
 \newpage
 \section{Codigos Fuente}\label{sec:sourcecode}
 \subsection{LCS.py}\label{subsec:lcs}
