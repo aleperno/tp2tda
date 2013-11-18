@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.12.5)  17 NOV 2013 20:28
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.12.5)  17 NOV 2013 22:14
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -283,29 +283,82 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 )))
-(/usr/share/texmf-texlive/tex/latex/listings/listings.sty
+(/usr/share/texmf/tex/latex/algorithm2e/algorithm2e.sty
+Package: algorithm2e 2013/01/06 v5.00 algorithms environments
+\c@AlgoLine=\count90
+
+(/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texmf-texlive/tex/latex/tools/xspace.sty
+Package: xspace 2006/05/08 v1.12 Space after command names (DPC,MH)
+)
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/relsize.sty
+Package: relsize 2003/07/04 ver 3.1
+)
+********************************************************
+Package `algorithm2e' Release 5.0 -- january 06 2013 --
+- algorithm2e-announce@lirmm.fr mailing list for announcement about releases
+- algorithm2e-discussion@lirmm.fr mailing list for discussion about package
+subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
+- Author: Christophe Fiorio (cfiorio@um2.fr)
+********************************************************
+\skiptotal=\skip43
+\skiplinenumber=\skip44
+\skiprule=\skip45
+\skiphlne=\skip46
+\skiptext=\skip47
+\skiplength=\skip48
+\algomargin=\skip49
+\skipalgocfslide=\skip50
+\algowidth=\dimen104
+\inoutsize=\dimen105
+\inoutindent=\dimen106
+\interspacetitleruled=\dimen107
+\interspacealgoruled=\dimen108
+\interspacetitleboxruled=\dimen109
+\algocf@inoutbox=\box26
+\algocf@inputbox=\box27
+\AlCapSkip=\skip51
+\AlCapHSkip=\skip52
+\algoskipindent=\skip53
+\algocf@nlbox=\box28
+\algocf@hangingbox=\box29
+\algocf@untilbox=\box30
+\algocf@skipuntil=\skip54
+\algocf@capbox=\box31
+\algoheightruledefault=\skip55
+\algoheightrule=\skip56
+\algotitleheightruledefault=\skip57
+\algotitleheightrule=\skip58
+\c@algocfline=\count91
+\c@algocfproc=\count92
+\c@algocf=\count93
+\algocf@algoframe=\box32
+\algocf@algobox=\box33
+) (/usr/share/texmf-texlive/tex/latex/listings/listings.sty
 (/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks18
 )
-\lst@mode=\count90
-\lst@gtempboxa=\box26
+\lst@mode=\count94
+\lst@gtempboxa=\box34
 \lst@token=\toks19
-\lst@length=\count91
-\lst@currlwidth=\dimen104
-\lst@column=\count92
-\lst@pos=\count93
-\lst@lostspace=\dimen105
-\lst@width=\dimen106
-\lst@newlines=\count94
-\lst@lineno=\count95
-\lst@maxwidth=\dimen107
+\lst@length=\count95
+\lst@currlwidth=\dimen110
+\lst@column=\count96
+\lst@pos=\count97
+\lst@lostspace=\dimen111
+\lst@width=\dimen112
+\lst@newlines=\count98
+\lst@lineno=\count99
+\lst@maxwidth=\dimen113
 
 (/usr/share/texmf-texlive/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
-\c@lstnumber=\count96
-\lst@skipnumbers=\count97
-\lst@framebox=\box27
+\c@lstnumber=\count100
+\lst@skipnumbers=\count101
+\lst@framebox=\box35
 )
 (/usr/share/texmf-texlive/tex/latex/listings/listings.cfg
 File: listings.cfg 2007/02/22 1.4 listings configuration
@@ -322,91 +375,231 @@ Package color Info: Driver file: pdftex.def on input line 130.
 
 (/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2009/08/25 v0.04m Graphics/color for pdfTeX
-\Gread@gobject=\count98
+\Gread@gobject=\count102
 ))
 (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
-) (./simple.aux)
+)
+(/usr/share/texmf-texlive/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texmf-texlive/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/hycolor.sty
+Package: hycolor 2009/10/02 v1.5 Code for color options of hyperref/bookmark (H
+O)
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/xcolor-patch.sty
+Package: xcolor-patch 2009/10/02 xcolor patch
+))
+\@linkdim=\dimen114
+\Hy@linkcounter=\count103
+\Hy@pagecounter=\count104
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)
+(/usr/share/texmf-texlive/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
+t (HO)
+))
+Package hyperref Info: Hyper figures OFF on input line 2975.
+Package hyperref Info: Link nesting OFF on input line 2980.
+Package hyperref Info: Hyper index ON on input line 2983.
+Package hyperref Info: Plain pages OFF on input line 2990.
+Package hyperref Info: Backreferencing OFF on input line 2995.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 3191.
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
+\Urlmuskip=\muskip10
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 3428.
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bitset.sty
+Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/intcalc.sty
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bigintcalc.sty
+Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
+ (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
+)
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+)))
+\Fld@menulength=\count105
+\Field@Width=\dimen115
+\Fld@charsize=\dimen116
+\Field@toks=\toks20
+Package hyperref Info: Hyper figures OFF on input line 4377.
+Package hyperref Info: Link nesting OFF on input line 4382.
+Package hyperref Info: Hyper index ON on input line 4385.
+Package hyperref Info: backreferencing OFF on input line 4392.
+Package hyperref Info: Link coloring OFF on input line 4397.
+Package hyperref Info: Link coloring with OCG OFF on input line 4402.
+Package hyperref Info: PDF/A mode OFF on input line 4407.
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
+)
+\Hy@abspage=\count106
+\c@Item=\count107
+\c@Hfootnote=\count108
+)
+*hyperref using default driver hpdftex*
+(/usr/share/texmf-texlive/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
+\Fld@listcount=\count109
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 35.
+ (./simple.aux)
 \openout1 = `simple.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-\c@lstlisting=\count99
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+\c@lstlisting=\count110
 
 (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count100
-\scratchdimen=\dimen108
-\scratchbox=\box28
-\nofMPsegments=\count101
-\nofMParguments=\count102
-\everyMPshowfont=\toks20
-\MPscratchCnt=\count103
-\MPscratchDim=\dimen109
-\MPnumerator=\count104
-\everyMPtoPDFconversion=\toks21
+\scratchcounter=\count111
+\scratchdimen=\dimen117
+\scratchbox=\box36
+\nofMPsegments=\count112
+\nofMParguments=\count113
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count114
+\MPscratchDim=\dimen118
+\MPnumerator=\count115
+\everyMPtoPDFconversion=\toks22
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 39.
+Package hyperref Info: Link coloring ON on input line 48.
+ (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
+Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
+)
+\c@section@level=\count116
+)
+LaTeX Info: Redefining \ref on input line 48.
+LaTeX Info: Redefining \pageref on input line 48.
+ (./simple.out)
+(./simple.out)
+\@outlinefile=\write3
+\openout3 = `simple.out'.
+
+\AtBeginShipoutBox=\box37
+LaTeX Font Info:    Try loading font information for U+msa on input line 50.
  (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 39.
+LaTeX Font Info:    Try loading font information for U+msb on input line 50.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./simple.toc)
-\tf@toc=\write3
-\openout3 = `simple.toc'.
+\tf@toc=\write4
+\openout4 = `simple.toc'.
 
  [2]
-Underfull \hbox (badness 10000) in paragraph at lines 47--75
+Underfull \hbox (badness 10000) in paragraph at lines 57--85
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--75
+Underfull \hbox (badness 10000) in paragraph at lines 57--85
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--75
+Underfull \hbox (badness 10000) in paragraph at lines 57--85
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--75
+Underfull \hbox (badness 10000) in paragraph at lines 57--85
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--75
+Underfull \hbox (badness 10000) in paragraph at lines 57--85
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--75
+Underfull \hbox (badness 10000) in paragraph at lines 57--85
 
  []
 
 [3]
-Overfull \hbox (18.78064pt too wide) in paragraph at lines 109--112
+Overfull \hbox (18.78064pt too wide) in paragraph at lines 119--122
 \OT1/cmr/m/n/12 ci^^Son. Por ejem-p-lo dadas las se-cuen-cias x=GATCGGCAT e y=C
 AATGTGAATC,
  []
 
-[4] [5] (./testing2.py
+[4] [5]
+Underfull \hbox (badness 10000) in paragraph at lines 179--182
+
+ []
+
+[6] [7] [8] (./testing2.py
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 2.
  (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
@@ -416,10 +609,10 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 
 Overfull \hbox (54.0045pt too wide) in paragraph at lines 22--23
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[6] [7]
+[9] [10]
 LaTeX Font Info:    Try loading font information for OML+cmr on input line 103.
 
  (/usr/share/texmf-texlive/tex/latex/base/omlcmr.fd
@@ -427,164 +620,169 @@ File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 103.
- [8]
+ [11]
 Overfull \hbox (18.00415pt too wide) in paragraph at lines 158--159
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
  []
 
-[9]
+[12]
 Overfull \hbox (48.00446pt too wide) in paragraph at lines 196--197
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][] 
+[][][][][][][] 
  []
 
 
 Overfull \hbox (12.00409pt too wide) in paragraph at lines 208--209
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
  []
 
-[10]
+[13]
 Overfull \hbox (60.00458pt too wide) in paragraph at lines 229--230
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][] 
+][][][][][][] 
  []
 
 
 Overfull \hbox (60.00458pt too wide) in paragraph at lines 247--248
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][] 
+][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (84.00482pt too wide) in paragraph at lines 252--253
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (78.00476pt too wide) in paragraph at lines 253--254
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][] 
+[][][][][][][] 
  []
 
 
 Overfull \hbox (12.00409pt too wide) in paragraph at lines 257--258
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (6.00403pt too wide) in paragraph at lines 264--265
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][] 
+][][][][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (72.0047pt too wide) in paragraph at lines 268--269
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][] 
+[][][][] 
  []
 
-[11]
+[14]
 Overfull \hbox (6.00403pt too wide) in paragraph at lines 273--274
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][] 
+][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (78.00476pt too wide) in paragraph at lines 294--295
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-] 
+][] 
  []
 
-[12]
+[15]
 Overfull \hbox (84.00482pt too wide) in paragraph at lines 332--333
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][] 
+[][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (36.00433pt too wide) in paragraph at lines 335--336
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-] 
+][] 
  []
 
 
 Overfull \hbox (30.00427pt too wide) in paragraph at lines 339--340
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][] 
+][][] 
  []
 
 
 Overfull \hbox (36.00433pt too wide) in paragraph at lines 352--353
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[13]
+[16]
 Overfull \hbox (6.00403pt too wide) in paragraph at lines 369--370
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][] 
+][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (108.00507pt too wide) in paragraph at lines 376--377
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][] 
+][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (48.00446pt too wide) in paragraph at lines 390--391
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
- 
+[] 
  []
 
 
 Overfull \hbox (72.0047pt too wide) in paragraph at lines 394--395
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
 Overfull \hbox (78.00476pt too wide) in paragraph at lines 404--405
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][] 
+[][][][][][][][][][] 
  []
 
-[14]
+[17]
 Overfull \hbox (36.00433pt too wide) in paragraph at lines 417--418
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][] 
+][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) [15] (./simple.aux) ) 
+) [18] (./simple.aux) ) 
 Here is how much of TeX's memory you used:
- 3577 strings out of 495061
- 44758 string characters out of 1182621
- 152373 words of memory out of 3000000
- 6731 multiletter control sequences out of 15000+50000
+ 8620 strings out of 495061
+ 119884 string characters out of 1182621
+ 263487 words of memory out of 3000000
+ 11210 multiletter control sequences out of 15000+50000
  13564 words of font info for 53 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 31i,6n,40p,193b,1674s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,11n,40p,263b,1828s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 ></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/shar
-e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texl
-ive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/ty
-pe1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/a
-msfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
-cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb><
-/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on simple.pdf (15 pages, 148647 bytes).
+e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texl
+ive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/ty
+pe1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/a
+msfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
+mr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr
+/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texm
+f-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/fo
+nts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-texlive/fonts/type1/p
+ublic/amsfonts/cm/cmtt12.pfb>
+Output written on simple.pdf (18 pages, 249401 bytes).
 PDF statistics:
- 91 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 720 PDF objects out of 1000 (max. 8388607)
+ 476 named destinations out of 1000 (max. 500000)
+ 49 words of extra memory for PDF output out of 10000 (max. 10000000)
 

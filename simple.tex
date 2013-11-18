@@ -3,6 +3,7 @@
 \usepackage[spanish]{babel}
 \usepackage{amsfonts}
 \usepackage[utf8]{inputenx}
+\usepackage{algorithm2e}
 \usepackage{listings}
 
 \usepackage{color}
@@ -22,6 +23,15 @@
 			keywordstyle=\color{deepred},
 			stringstyle=\color{deepgreen},
 			commentstyle=\color{deepblue},
+}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
 }
 
 
@@ -122,6 +132,137 @@ utilizando un subconjunto de las operaciones copiar, reemplazar, borrar, inserta
 intercambiar y terminar para resolver el problema de la alineación de secuencias de
 ADN con el método dado.
 
+\newpage
+\section{Resolución}
+\subsection{Distancia de edición}
+Para la resolución de los problemas planteados se tuvieron en cuenta
+algunas hipótesis:
+
+\begin{itemize}
+	\item El costo individual de copiar y reemplazar, son menores que los costos de las
+combinaciones de borrar e insertar.
+	\item Conozco soluciones parciales anteriores del problema.
+	\item El problema es case sensitive, por lo cual mayúsculas y minúsculas serán
+diferenciadas.
+	\item Las operaciones estan sujetas a prohibición.
+\end{itemize}
+
+El problema se atacó desde un punto de vista dinámico utilizando el enfoque de
+memorización, es decir que se van guardando en memoria soluciones previas a un problema
+menor, cuya solución considero es óptima.
+Para ello se utilizó un diccionario que irá alojando las soluciones previas para tenerlas
+disponibles para ensamblar soluciones futuras. El concepto de solución es:
+\begin{itemize}
+	\item $S_{n}=S_{n-1}+s(n)$
+\end{itemize}
+
+Es decir que la solución hasta un carácter se compone de la solución hasta el carácter anterior
+más una solución para ese único carácter.
+
+Para la composición de la solución se hace uso de la hipótesis de que la
+copia es la mejor operacion a realizar (menor costo), para poder realizar
+una toma de decisiones se utiliza como recursos el resultado obtenido de
+una implementación de LCS\footnote{Longest Common Sequence - Secuencia Común más Larga}
+y un análisis de la diferencia de tamaños entre la base y el objetivo.
+
+Algunas de las consideraciones que se toman en cuenta son:
+\begin{itemize}
+	\item Si $base(pos)\in LCS \rightarrow$ es un caracter que se puede 
+	copiar, si se puede copiar esa misma instancia u otra con sus respectivos
+	impactos.
+	\item Si $|base| <= |objetivo| \rightarrow$ borrar un caracter implica 
+	a futuro una inserción.
+	\item Si $|base| >= |objetivo| \rightarrow$ una inserción puede a futuro
+	implicar un borrar o terminar.
+\end{itemize}
+
+Teniendo en cuenta estas consideraciones se hace un análisis de costos y 
+de que operación es la óptima a efectuar.
+\\
+
+\begin{algorithm}[H]
+	\SetAlgoLined
+	
+	\KwData{n}
+	\KwResult{lista\_solucion }
+	
+	\If {$post == 0$}{
+			return $s(n)$;
+	}
+	\If {$!Dict_{n-1}$}{
+			$Dict_{n-1}=S_{n-1}$\;
+	}
+	\If {$!Dict_{n}$}{
+			$Dict_{n-1}=Dict_{n-1}+s(n)$\;
+	}
+	$l\leftarrow Dict_{n}$\;
+	return $l$;
+
+\caption{Obtención $S_{n}$ con memorización}
+\end{algorithm}
+
+\subsection{Alineación secuencias ADN}
+Para la resolución del problema de alinear secuencias de ADN se utiliza 
+el mismo algoritmo utilizado para la distancia de edición, utilizando un
+conjunto de operaciones adaptados a este problema. Para hallar que operaciones
+y que respectivos costos se debieran utilizar se hizo un analisis del problema.
+Veamos el ejemplo de alineación:
+
+\[
+\begin{array}{clcccc}
+ & &1 &2 &3 &4 \\
+  &base: &G &\space &A &C \\
+  &objetivo: &C &A &A&\space \\
+  &costo: &-1 &-2 &+1 &-2 
+\end{array}
+\]
+
+\begin{itemize}
+	\item 1) Representa un reemplazo con un costo de -1.
+	\item 2) Representa una inserción con un costo de -2.
+	\item 3) Representa un copiar con un costo de +1.
+	\item 4) Representa un borrar con un costo de -2.
+	\item No se realizan operaciones terminar o intercambiar.
+\end{itemize}
+
+El objetivo de la alineación es obtener aquella alineación cuyo puntaje
+es máximo, pero siendo que el algoritmo a utilizar trabaja con mínimos,
+lo que se debe realizar es invertir los costos (eg: Copiar:-1); asi mismo
+el resultado que obtendremos también debemos invertirlo para que represente
+el puntaje máximo.
+Por ejemplo el archivo de costos a utilizar sería:
+\begin{lstlisting}
+reemplazar:1
+insertar:2
+borrar:2
+copiar:-1
+\end{lstlisting}
+
+Utilizando este archivo para la resolución de las secuencias dadas como
+ejemplo obtenemos:
+\begin{lstlisting}
+reemplazar g c
+copiar a
+insertar a
+copiar t
+reemplazar c g
+reemplazar g t
+copiar g
+reemplazar c a
+copiar a
+copiar t
+insertar c
+
+El costo es: 3
+\end{lstlisting}
+Cuyo puntaje de alineacion es -3 y equivale a:
+\[
+\begin{array}{ccccccccccccc}
+  &G &\space &A &T &C &G &G &C &A &T &\space  \\
+  &C &A &A &T &G &T &G &A &A &T &C	\\
+  &-1 &-2 &+1 &+1 &-1 &-1 &+1 &-1 &+1 &+1 &-2
+\end{array}
+\]
 
 \newpage
 \lstinputlisting{testing2.py}
