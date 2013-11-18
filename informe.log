@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.12.5)  18 NOV 2013 00:42
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.12.5)  18 NOV 2013 00:45
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**simple.tex
-(./simple.tex
+**informe.tex
+(./informe.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
 yphenation, loaded.
@@ -495,8 +495,8 @@ File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
 \Fld@listcount=\count109
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 35.
- (./simple.aux)
-\openout1 = `simple.aux'.
+ (./informe.aux)
+\openout1 = `informe.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
 LaTeX Font Info:    ... okay on input line 48.
@@ -538,10 +538,10 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 LaTeX Info: Redefining \ref on input line 48.
 LaTeX Info: Redefining \pageref on input line 48.
- (./simple.out)
-(./simple.out)
+ (./informe.out)
+(./informe.out)
 \@outlinefile=\write3
-\openout3 = `simple.out'.
+\openout3 = `informe.out'.
 
 \AtBeginShipoutBox=\box37
 LaTeX Font Info:    Try loading font information for U+msa on input line 50.
@@ -554,9 +554,9 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 50.
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./simple.toc)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./informe.toc)
 \tf@toc=\write4
-\openout4 = `simple.toc'.
+\openout4 = `informe.toc'.
 
  [2]
 Underfull \hbox (badness 10000) in paragraph at lines 57--85
@@ -772,29 +772,29 @@ Overfull \hbox (36.00433pt too wide) in paragraph at lines 417--418
 ][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) [23] (./simple.aux) ) 
+) [23] (./informe.aux) ) 
 Here is how much of TeX's memory you used:
- 8708 strings out of 495061
- 121008 string characters out of 1182621
+ 8709 strings out of 495061
+ 121029 string characters out of 1182621
  264631 words of memory out of 3000000
  11238 multiletter control sequences out of 15000+50000
  15120 words of font info for 59 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 38i,11n,40p,263b,1830s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
-/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx8.pfb>
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share
-/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texl
-ive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/ty
-pe1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/a
-msfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
-mr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></us
-r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf
--texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fo
-nts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/pu
-blic/amsfonts/cm/cmti12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
-ts/cm/cmtt12.pfb>
-Output written on simple.pdf (23 pages, 283921 bytes).
+ 38i,11n,40p,264b,1830s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx8.pfb
+></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
+e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-tex
+live/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/t
+ype1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/
+amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
+cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></u
+sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texm
+f-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/f
+onts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/p
+ublic/amsfonts/cm/cmti12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
+nts/cm/cmtt12.pfb>
+Output written on informe.pdf (23 pages, 283921 bytes).
 PDF statistics:
  847 PDF objects out of 1000 (max. 8388607)
  532 named destinations out of 1000 (max. 500000)
