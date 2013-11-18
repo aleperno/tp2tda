@@ -5,3 +5,7 @@
 \contentsline {section}{\numberline {2}Resoluci\IeC {\'o}n}{6}{section.2}
 \contentsline {subsection}{\numberline {2.1}Distancia de edici\IeC {\'o}n}{6}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Alineaci\IeC {\'o}n secuencias ADN}{7}{subsection.2.2}
+\contentsline {section}{\numberline {3}An\IeC {\'a}lisis de orden}{9}{section.3}
+\contentsline {section}{\numberline {4}Ejecuci\IeC {\'o}n y pruebas}{10}{section.4}
+\contentsline {section}{\numberline {5}Reformas respecto 1\IeC {\textordmasculine } informe}{11}{section.5}
+\contentsline {section}{\numberline {6}Codigos Fuente}{12}{section.6}
