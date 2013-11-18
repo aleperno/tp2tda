@@ -8,7 +8,6 @@ O(#a+1 * #b+1) = O(#a*#b + #a + #b + 1)
 1 < #a*#b
 ->
 O(#a*#b + #a + #b + 1) < O(3*#a*#b)
-
 Total time compexity using big O properties 
 O(#a * #b)
 """
@@ -26,10 +25,8 @@ def lcs(a, b):
     # read the substring out from the matrix
     result = ""
     x, y = len(a), len(b) #O(1)
-    """
-    Worst case scenario in each cycle either x or y is modified (not both)
-    Time Compexity: O(x*y)
-    """
+    """Worst case scenario in each cycle either x or y is modified (not both)
+    Time Compexity: O(x*y)"""
     while x != 0 and y != 0:
         if lengths[x][y] == lengths[x-1][y]: #O(1)
             x -= 1

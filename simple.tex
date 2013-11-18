@@ -269,16 +269,76 @@ Cuyo puntaje de alineacion es -3 y equivale a:
 A continuación se hará un análisis de los órdenes de los principales
 módulos que se utilizan en la resolución del problema. Se omiten aquellos
 que no revisten complejidad y/o relevancia, pero cuyo análisis igual se
-encuentra en el código fuente\footnote{Ver sección \ref{sec:sourcecode}}
+encuentra en el código fuente\footnote{Ver \ref{sec:sourcecode}}.
+
+\begin{itemize}
+	\item LCS\footnote{Ver \ref{subsec:lcs}}: El algoritmo consta
+	de tres segmentos, el costo total es la suma de los costos individuales.
+	
+	$O(|base|+1 * |obj|+1)+O(|base|*|obj|)+O(|base|*|obj|)$
+	
+	$O(|base|+1 * |obj|+1)=O(|base|*|obj|+|base|+|obj|+1)<O(3*|base|*|obj|)=O(|base|*|obj|)$
+	\\Por propiedades de O, el orden total es:
+	\\$O(|base|*|obj|)$
+	
+	\item solve()\footnote{\label{pie1}Ver \ref{subsec:tdatp2}}: Todas las operaciones realizadas son $O(1)$, hay un llamado
+	recursivo, pero de profundidad 1; por lo que se puede asegurar que el 
+	costo total de este módulo es $O(1)$
+	
+	\item solution(): Por cada elemento de la palabra objetivo, se analiza
+	si existe o no solución en tiempo constante. $O(|obj|)$
+	
+	\item La solución total se compone de efectuar un llamado a LCS y a 
+	solution(), siendo $O(|obj|)<O(|obj|*|base|)$ por propiedades de O
+	la cota superior de todo el problema es $O(|base|*|obj|)$
+\end{itemize}
 
 \newpage
 \section{Ejecución y pruebas}
-
+	Siendo que el lenguaje utilizado es Python, no es necesaria ninguna 
+	compilación. El programa se puede ejecutar directamente mediante el 
+	siguiente formato:
+	
+	\verb#  python tdatp2 <base> <objetivo> <archivo costos>#
+	\\o bien: 
+	
+	\verb# ./tdatp2 <base> <objetivo> <archivo costos>#
+	
+	Asimismo se incluye un conjunto de datos de prueba y scripts para 
+	ejecutar pruebas de manera sencilla, dichos scripts se encuentran 
+	escritos en lenguaje bash para ser ejecutados en enturnos UNIX.
+	
+	Para la primera parte del enunciado, se dan 4 conjuntos de datos, 
+	para realizar pruebas con los mismos se debe invocar al script $test.sh$ 
+	de la siguiente manera:
+	
+	\verb# ./test.sh [1-4]#
+	
+	De similar modo para ejecutar la prueba del ejemplo de alineación de
+	secuencias de ADN, se provee del archivo de datos mencionado con 
+	anterioridad y un script de prueba $adntest.sh$ cuya invocación es directa:
+	
+	\verb# ./adntest.sh#
+	
+\newpage
+\section{Conclusiones}
+	Se diseñó e implementó un algoritmo para analizar las operaciones 
+	necesarias para transformar una palabra en otra, considerando una
+	serie de costos asociados.
+	
+	Se hace un análisis del entorno del problema, para analizar las 
+	posibles implicancias de una operación y preveer costos a futuro
+	que puede acarrear efectuar la misma.
 
 \newpage
 \section{Reformas respecto 1º informe}
 
 \newpage
 \section{Codigos Fuente}\label{sec:sourcecode}
-\lstinputlisting{testing2.py}
+\subsection{LCS.py}\label{subsec:lcs}
+\lstinputlisting{LCS.py}
+
+\newpage
+\subsection{tdatp2.py}\label{subsec:tdatp2}
+\lstinputlisting{tdatp2.py}
 \end{document}

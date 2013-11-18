@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import LCS
 
 class Cost(object):
 	"""Se utiliza el patron singleton que fue modificado
@@ -36,9 +35,6 @@ class Cost(object):
 	"""O(1)"""
 	def costo(self,op):
 		return self.dict[op]
-
-	def existe(self,op):
-		return self.dict.has_key(op)
 
 """TODAS LAS OPERACIONES SON O(1)"""
 class Copiar():
@@ -95,24 +91,13 @@ class Problem():
 		self.base = pal1
 		self.posbase = 0
 		self.objective = pal2
-		self.lcs= LCS.lcs(pal1,pal2) #O(#pal1 * #pal2)
-		self.poslcs = 0
+		self.res=[]
 		self.mem={}
-		self.diff = len(pal2)-len(pal1) #O(1) 
 		self.cost=0
-		self.term = False if (self.diff >= 0) else True #O(1)
-		self.inser = self.diff if (self.diff > 0) else 0 #O(1)
-		self.borr = self.diff if (self.diff < 0) else 0 #O(1)
 
 	"""O(1)"""
 	def eob(self):
 		return self.posbase == len(self.base)
-
-	def verLcs(self):
-		try:
-			return self.lcs[self.poslcs]
-		except IndexError:
-			return None
 
 	"""O(1)"""
 	def verBase(self):
@@ -141,7 +126,6 @@ class Problem():
 		c = Copiar(self.verBase())
 		self.posbase += 1
 		self.cost += Cost().costo('copiar')
-		self.poslcs += 1
 		return [c]
 
 	"""O(1)"""
@@ -149,15 +133,6 @@ class Problem():
 		char = self.objective[pos]
 		i = Insertar(char)
 		self.cost += Cost().costo('insertar')
-		_terminar = Cost().existe('terminar')
-		_borrar = Cost().existe('borrar')
-		if self.diff >= 0:
-			if not _borrar and _terminar:
-				self.term = True
-			elif _borrar and _terminar:
-				minim = min(Cost().costo('borrar'),Cost().costo('terminar'))
-				if minim == Cost().costo('terminar'):
-					self.term = True
 		return [i]
 
 	"""O(1)"""
@@ -179,8 +154,6 @@ class Problem():
 	def reemplazar(self,pos):
 		r = Reemplazar(self.verBase(),self.verObj(pos))
 		self.cost += Cost().costo('reemplazar')
-		if (self.verBase()==self.verLcs()):
-			self.poslcs +=1
 		self.posbase += 1
 		return [r]
 
@@ -192,52 +165,8 @@ class Problem():
 		return [b]
 
 	"""O(1)"""
-	def aInsertar(self,pos):
-		"""Se analiza el costo de insertar, se supone que la prox seria copia 
-			sino no conviene insertar"""
-		costo = Cost().costo('insertar')+Cost().costo('copiar')
-		_terminar = Cost().existe('terminar')
-		_borrar = Cost().existe('borrar')
-		if self.diff <= 0:
-			#Insertar implica que deba o borrar o terminar
-			if not _borrar and _terminar:
-				costo += Cost().costo('terminar') if not self.term else 0
-			elif not _terminar and _borrar:
-				costo += Cost().costo('borrar')
-			else:
-				step = min(Cost().costo('terminar'),Cost().costo('borrar'))
-				if step == Cost().costo('terminar'):
-					costo += step if not self.term else 0
-				else:
-					costo += step
-
-		return costo
-
-	"""O(1)"""
-	def aBorrar(self,pos):
-		costo = Cost().costo('borrar')+Cost().costo('copiar')
-		if self.diff >= 0:
-			#Borrar implica insertar
-			costo += Cost().costo('insertar')
-		return costo
-
-	"""O(1)"""
-	def aReemplazar(self,pos):
-		costo=Cost().costo('reemplazar')
-
-		if self.verBase()==self.verLcs():
-			costo+=Cost().costo('reemplazar') if Cost().existe('terminar') else 0
-		if self.verSigBase()==self.verSigObj(pos):
-			costo+=Cost().costo('copiar')
-		else:
-			costo+=Cost().costo('reemplazar')
-		return costo
-
-	"""O(1)"""
 	def checkintercambio(self,pos):
 		"""Evalua si es viable un intercambio"""
-		if not Cost().existe('intercambio'):
-			return False
 		if pos < len(self.objective):
 			"""Evaluo caso de intercambio"""
 			b1 = self.verBase()
@@ -296,6 +225,7 @@ class Problem():
 		return minimo
 	
 	"""
+	Idem anterior
 	O(#l)
 	A efectos de esta implementacion:
 	O(3)=O(1)
@@ -312,37 +242,45 @@ class Problem():
 		return minimo
 
 	"""
+	Devuelve el costo total de una lista de operaciones
+	O(#l)
+	A efectos de esta implementacion
+	O(1)
+	"""
+	def opcost(self,l):
+		aux = 0
+		for i in l:
+			cost = (i[0]*Cost().costo(i[1]))
+			aux += cost	
+		return aux
+
+	"""
 	Determina cual es la mejor manera de obtener el caracter actual
 	con los elementos disponibles en la palabra base
-	O(1)
+	O(#Base)
 	"""
 	def solve(self,pos,aux=None):
 		r = []
-		if self.eob(): #O(1)
-			"""No hay otra opcion mas que insertar, ya que se agotaron
+		if self.eob():
+			"""No hay otra opcion más que insertar, ya que se agotaron
 			los caracteres disponibles en la base"""
-			if Cost().existe('insertar'):
-				return self.insertar(pos)   #O(1)
+			return self.insertar(pos)   #O(1)
 
 		#O(1)
-		if (self.verBase() == self.objective[pos]) \
-											and Cost().existe('copiar'): 
+		if self.verBase() == self.objective[pos]: 
 			"""Es el caso de copiar"""
 			aux = self.checkintercambio(pos) #O(1)
 			"""Evaluo si en vez de copiar se puede intercambiar y si es mas optimo"""
 			#O(1)
-			if not aux or (aux and \
-								self.min([(1,'copiar'),(1,'intercambiar')])=='copiar'):
+			if not aux or (aux and self.min([(1,'copiar'),(1,'intercambiar')])=='copiar'):
 				"""Evaluo si en vez de copiar se puede reemplazar"""
 				#O(1)
-				if (not Cost().existe('reemplazar'))or\
-								(self.min([(1,'copiar'),(1,'reemplazar')])=='copiar'):
+				if (self.min([(1,'copiar'),(1,'reemplazar')])=='copiar'):
 					return self.copiar() #O(1)
 				else:
-					"""No tiene sentido que reemplazar sea mas eficiente, 
-					igual se implementa"""
+					"""No tiene sentido que reemplazar sea mas eficiente, igual se implementa"""
 					return self.reemplazar(pos) #O(1)
-		
+
 		#O(1)
 		if pos < len(self.objective):
 			"""Evaluo caso de intercambio"""
@@ -361,34 +299,69 @@ class Problem():
 						pass
 				return r
 
-		if Cost().existe('copiar'):
-			costoInsertar = None
-			costoBorrar = None
-			costoReemplazar = None
-			if self.verBase() == self.verLcs(): #O(1)
-				#Evaluo insertar, y la siguiente operacion seria una copia
-				costoInsertar = self.aInsertar(pos) #O(1)
-			if self.verSigBase() == self.verLcs() :				
-				#Evaluo borrar, y la siguiente operacion seria una copia
-				costoBorrar = self.aBorrar(pos)
-			costoReemplazar = self.aReemplazar(pos)
-			#O(1)
-			op = self.min2([(costoReemplazar,'r'),(costoInsertar,'i'),(costoBorrar,'b')])
-			if op == 'r':
-				return self.reemplazar(pos)
-			elif op == 'b':
-				r += self.borrar() #O(1)
-				r += self.solve(pos,r) #O(1)
-				return r
-			else:
-				return self.insertar(pos) #O(1)
+		"""En este punto tengo que evaluar borrar, insertar o reemplazar"""
 
-		print "No debiera llegar a este punto---"
+		d = None
+		c = None
+		d1 = self.distinter(pos)
+		if d1>0:
+			"""Distancia cero implica que no es posible la operacion"""
+			c1 = self.opcost([(d1,'borrar'),(1,'intercambiar')])   #O(2)=O(1)
+			d = d1
+			c = c1
+
+		d2 = self.distcopy(pos)
+		if d2>0:
+			c2 = self.opcost([(d2,'borrar'),(1,'copiar')])    #O(2)=O(1)
+			if (c2 < c) or (c is None):
+				c = c2
+				d = d2
+
+		c3 = self.opcost([(1,'insertar')]) #O(1)
+		c4 = self.opcost([(1,'reemplazar')]) #O(1)
+
+		op = self.min2([(c,'borrar'),(c3,'insertar'),(c4,'reemplazar')]) #O(3)=O(1)
+
+		"""
+		El peor caso seria que estemos en el principio y que debamos copiar un elemento
+		que se encuentre al final de la palabra base
+		O(#base)
+		"""
+
+		if self.verBase()==self.verSigObj(pos):
+			"""
+			Analizo insertar acá, para que la siguiente operacion sea copia.
+			"""
+			if (self.verBase() == self.verSigBase()) and (c4 < c3):
+				"""Implica la posibilidad tambien de reemplazar, analiza costo"""
+				return self.reemplazar(pos)
+			else:
+				return self.insertar(pos)
+
+		if self.verSigBase()==self.verSigObj(pos):
+			return self.reemplazar(pos)
+
+		if op == 'borrar':
+			for i in range(0,d): 	#O(d)
+				r += self.borrar()	 #O(1)
+			r += self.solve(pos,r) 	#O(1)
+			"""
+			A pesar de ser recursivo, siendo que ya analizamos que vamos a copiar/intercambiar
+			por lo que en la llamada recursiva es seguro que no llegue a este punto y 
+			devuelva una solucion lineal
+			"""
+			return r
+		elif op == 'insertar':
+			return self.insertar(pos) #O(1)
+		else:
+			return self.reemplazar(pos) #O(1)
+
 
 	"""
-	Se emplea programacion dinamica usando memorizacion.
-	Se hacen tantas llamadas a la funcion como caracteres a obtener de alli
-	O(#Objetivo)
+	Se emplea programacion dinamica usando memorización.
+	Se hacen tantas llamadas a la funcion como caracteres a obtener de allí
+	Siendo que el peor de los casos de solve es O(#base):
+	O(#base * #Objetivo)
 	"""
 	def solution(self,pos):
 		"""Como premisa supongo que ya poseo como conseguir una solucion anterior
@@ -406,22 +379,24 @@ class Problem():
 			self.mem[pos] += self.terminar()
 		return self.mem[pos]
 
-"""
-Siendo #pal2 < #pal1 * #pal2
-O(#pal1 * #pal2) + O(#pal2) < 2 O(#pal1 * #pal2)
-O(#pal1 * #pal2)
-"""
+def checkArguments():
+	return True
+
+
+
+
+
 def main():
 	print "Teoria y Algoritmos 1 - [75.29]"
 	print "TP2 - Distancia de Edicion"
-	print "Autores: Alejandro Pernin (92216) - Lautaro Medrano (90009)\n"
+	print "Autores: Alejandro Pernin (92216)\n"
 	s1 = Cost(file_source=sys.argv[3])
 	pal = sys.argv[1]
 	pal2 = sys.argv[2]
-	p = Problem(pal,pal2) #O(#pal1 * #pal2)
-	s = p.solution(len(pal2)-1) #O(#pal2)
-	for i in enumerate(s):
-		print i[0]+1,')',i[1]
+	p = Problem(pal,pal2)
+	s = p.solution(len(pal2)-1)
+	for i in s:
+		print i
 	print "\nEl costo es: %s" % str(p.cost)
 if __name__ == '__main__':
 	main()

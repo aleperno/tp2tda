@@ -1,6 +1,6 @@
 #!/bin/bash
 
-python testing2.py gatcggcat caatgtgaatc ADN.txt
+python tdatp2.py gatcggcat caatgtgaatc ADN.txt
 
 <<COMMENT
 La solucion optima es

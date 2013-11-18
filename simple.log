@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.12.5)  17 NOV 2013 22:26
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.12.5)  18 NOV 2013 00:42
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -599,7 +599,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 179--182
 
  []
 
-[6] [7] [8] [9] [10] [11] (./testing2.py
+[6] [7] [8] [9] [10] [11] [12] (./LCS.py
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 2.
 
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
@@ -607,27 +607,39 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 2.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 6.
 
+(/usr/share/texmf-texlive/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 6.
+
+Overfull \hbox (120.00519pt too wide) in paragraph at lines 15--16
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (72.0047pt too wide) in paragraph at lines 28--29
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][] 
+ []
+
+) [13] (./tdatp2.py
 Overfull \hbox (54.0045pt too wide) in paragraph at lines 22--23
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[12] [13]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 103.
-
- (/usr/share/texmf-texlive/tex/latex/base/omlcmr.fd
-File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 103.
- [14]
+[14] [15] [16]
 Overfull \hbox (18.00415pt too wide) in paragraph at lines 158--159
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
 
  []
 
-[15]
+[17]
 Overfull \hbox (48.00446pt too wide) in paragraph at lines 196--197
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
@@ -640,7 +652,7 @@ Overfull \hbox (12.00409pt too wide) in paragraph at lines 208--209
 
  []
 
-[16]
+[18]
 Overfull \hbox (60.00458pt too wide) in paragraph at lines 229--230
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][] 
@@ -685,7 +697,7 @@ Overfull \hbox (72.0047pt too wide) in paragraph at lines 268--269
 [][][][] 
  []
 
-[17]
+[19]
 Overfull \hbox (6.00403pt too wide) in paragraph at lines 273--274
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][] 
@@ -697,7 +709,7 @@ Overfull \hbox (78.00476pt too wide) in paragraph at lines 294--295
 ][] 
  []
 
-[18]
+[20]
 Overfull \hbox (84.00482pt too wide) in paragraph at lines 332--333
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
@@ -722,7 +734,7 @@ Overfull \hbox (36.00433pt too wide) in paragraph at lines 352--353
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[19]
+[21]
 Overfull \hbox (6.00403pt too wide) in paragraph at lines 369--370
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][] 
@@ -754,18 +766,18 @@ Overfull \hbox (78.00476pt too wide) in paragraph at lines 404--405
 [][][][][][][][][][] 
  []
 
-[20]
+[22]
 Overfull \hbox (36.00433pt too wide) in paragraph at lines 417--418
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) [21] (./simple.aux) ) 
+) [23] (./simple.aux) ) 
 Here is how much of TeX's memory you used:
- 8641 strings out of 495061
- 120135 string characters out of 1182621
- 264526 words of memory out of 3000000
- 11222 multiletter control sequences out of 15000+50000
+ 8708 strings out of 495061
+ 121008 string characters out of 1182621
+ 264631 words of memory out of 3000000
+ 11238 multiletter control sequences out of 15000+50000
  15120 words of font info for 59 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  38i,11n,40p,263b,1830s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -782,9 +794,9 @@ r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf
 nts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/pu
 blic/amsfonts/cm/cmti12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
 ts/cm/cmtt12.pfb>
-Output written on simple.pdf (21 pages, 264594 bytes).
+Output written on simple.pdf (23 pages, 283921 bytes).
 PDF statistics:
- 765 PDF objects out of 1000 (max. 8388607)
- 484 named destinations out of 1000 (max. 500000)
- 81 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 847 PDF objects out of 1000 (max. 8388607)
+ 532 named destinations out of 1000 (max. 500000)
+ 105 words of extra memory for PDF output out of 10000 (max. 10000000)
 
