@@ -116,7 +116,7 @@ manera:
 \begin{itemize}
 	\item +1 si $x'[j]=y'[j]$ y ninguno es un espacio
 	\item -1 si $x'[j]\neq y'[j]$ y ninguno es un espacio
-	\item -1 si $x'[j]$ o $y'[j]$ es un espacio
+	\item -2 si $x'[j]$ o $y'[j]$ es un espacio
 \end{itemize}
 
 El puntaje total de la alineación es la suma de los puntaje de cada posición. Por ejemplo
@@ -335,7 +335,7 @@ encuentra en el código fuente\footnote{Ver \ref{sec:sourcecode}}.
 	posibles implicancias de una operación y preveer costos a futuro
 	que puede acarrear efectuar la misma.
 	
-	Se utilizaron estructuras que al a vez de permitir almacenar en 
+	Se utilizaron estructuras que a la vez de permitir almacenar en 
 	memoria soluciones parciales del problema, permitan tener un acceso
 	a las mismas en un tiempo óptimo.
 	
@@ -356,10 +356,10 @@ encuentra en el código fuente\footnote{Ver \ref{sec:sourcecode}}.
 		locales caracter a caracter, no teniendo en cuenta las futuras 
 		implicancias de una operación. Por lo que aún siendo una operación
 		óptima para la obtención del carácter deseado, esa operación a 
-		futuro podría acarrear realizar operaciones que aumetasen el costo
-		total.
+		futuro podría significar deber realizar operaciones que aumenten el costo
+		total, alejándolo del óptimo.
 		\item Con razón de proveer de información para la toma de decisiones
-		necesarias descriptas en el item anterior, se añadió implementó
+		necesarias descriptas en el item anterior, se implementó
 		el algoritmo de LCS.
 		\item Se considera la posibilidad de prohibir operaciones.
 		\item Se efectua un análisis más global del contexto del programa
